@@ -8,11 +8,11 @@ public class MyEdgeData implements EdgeData{
     private String info;
     private int tag;
 
-    public MyEdgeData(int Nsrc , double Nwidth, int Ndest)
+    public MyEdgeData(int nsrc , double nwidth, int ndest)
     {
-        this.src = Nsrc;
-        this.dest = Ndest;
-        this.width = Nwidth;
+        this.src = nsrc;
+        this.dest = ndest;
+        this.width = nwidth;
         this.info = "defult";
         this.tag = 0;
     }
