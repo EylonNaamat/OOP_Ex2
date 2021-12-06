@@ -9,7 +9,7 @@ public class MyNodeData implements NodeData{
     private double weight;
     private String info;
     private int tag;
-    HashMap<Integer, MyEdgeData> nodeMap;
+    private HashMap<Integer, MyEdgeData> nodeMap;
 
     public MyNodeData(int key, MyGeoLocation location){
         this.key = key;
