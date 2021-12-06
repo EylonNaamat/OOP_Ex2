@@ -19,12 +19,12 @@ public class MyDirectedWeightedGraph implements DirectedWeightedGraph{
 
     @Override
     public NodeData getNode(int key) {
-        return null;
+        return this.myGraph.get(key);
     }
 
     @Override
     public EdgeData getEdge(int src, int dest) {
-        return null;
+        return this.myGraph.get(src).;
     }
 
     @Override

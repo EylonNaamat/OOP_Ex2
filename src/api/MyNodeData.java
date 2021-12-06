@@ -68,4 +68,18 @@ public class MyNodeData implements NodeData{
     public void addEdge(MyEdgeData edge){
         this.nodeMap.put(edge.getDest(), edge);
     }
+
+    public MyEdgeData getEdge(int dest){
+        if(this.nodeMap.containsKey(dest) == true){
+            return this.nodeMap.get(dest);
+        }
+        return null;
+    }
+
+    public MyEdgeData removeEdge(int key){
+        if(this.nodeMap.containsKey(key) == true){
+            return this.nodeMap.remove(key);
+        }
+            return null;
+    }
 }
