@@ -5,12 +5,16 @@ public class MyEdgeData implements EdgeData{
     private int src;
     private int dest;
     private double width;
+    private String info;
+    private int tag;
 
     public MyEdgeData(int Nsrc , double Nwidth, int Ndest)
     {
-        this.src=Nsrc;
-        this.dest=Ndest;
-        this.width=Nwidth;
+        this.src = Nsrc;
+        this.dest = Ndest;
+        this.width = Nwidth;
+        this.info = "defult";
+        this.tag = 0;
     }
     @Override
     public int getSrc() {
@@ -29,21 +33,21 @@ public class MyEdgeData implements EdgeData{
 
     @Override
     public String getInfo() {
-        return null;
+        return this.info;
     }
 
     @Override
     public void setInfo(String s) {
-
+        this.info=s;
     }
 
     @Override
     public int getTag() {
-        return 0;
+        return this.tag;
     }
 
     @Override
     public void setTag(int t) {
-
+        this.tag=t;
     }
 }
