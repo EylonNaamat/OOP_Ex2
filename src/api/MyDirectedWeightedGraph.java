@@ -16,7 +16,7 @@ public class MyDirectedWeightedGraph implements DirectedWeightedGraph{
         this.nodesSize = 0;
         this.mc = 0;
     }
-
+    
     @Override
     public NodeData getNode(int key) {
         return this.myGraph.get(key);
@@ -37,7 +37,20 @@ public class MyDirectedWeightedGraph implements DirectedWeightedGraph{
 
     @Override
     public void connect(int src, int dest, double w) {
-
+        if(this.myGraph.containsKey(src)==false)
+        {
+            return;
+        }
+        EdgeData tempEdge = this.getEdge(src,dest);
+        if(tempEdge==null)
+        {
+            MyEdgeData tempMyEdge = new MyEdgeData(src, w ,dest);
+            this.myGraph.get(src).addEdge(tempMyEdge);
+        }
+        else
+        {
+            this.myGraph.get(src).getEdge(dest).setWeight(w);
+        }
     }
 
     @Override
@@ -57,26 +70,34 @@ public class MyDirectedWeightedGraph implements DirectedWeightedGraph{
 
     @Override
     public NodeData removeNode(int key) {
+        if(this.myGraph.containsKey(key)==true)
+        {
+            return this.myGraph.remove(key);
+        }
         return null;
     }
 
     @Override
     public EdgeData removeEdge(int src, int dest) {
+        if(this.myGraph.containsKey(src)==true)
+        {
+            return this.myGraph.get(src).removeEdge(dest);
+        }
         return null;
     }
 
     @Override
     public int nodeSize() {
-        return 0;
+        return this.nodesSize;
     }
 
     @Override
     public int edgeSize() {
-        return 0;
+        return this.edgesSize;
     }
 
     @Override
     public int getMC() {
-        return 0;
+        return this.mc;
     }
 }

@@ -30,6 +30,9 @@ public class MyEdgeData implements EdgeData{
     public double getWeight() {
         return this.width;
     }
+    public void setWeight(double nw) {
+        this.width=nw;
+    }
 
     @Override
     public String getInfo() {
