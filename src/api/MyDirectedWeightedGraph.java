@@ -1,10 +1,11 @@
 package api;
 
+import java.util.HashMap;
 import java.util.Iterator;
 
 public class MyDirectedWeightedGraph implements DirectedWeightedGraph{
 
-
+    HashMap<>
 
     @Override
     public NodeData getNode(int key) {
