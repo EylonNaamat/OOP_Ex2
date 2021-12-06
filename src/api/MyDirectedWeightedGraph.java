@@ -33,11 +33,12 @@ public class MyDirectedWeightedGraph implements DirectedWeightedGraph{
         this.myGraph.put(n.getKey(), temp);
         this.nodesSize++;
         this.edgesSize += this.myGraph.get(n.getKey()).getSize();
+        this.mc++;
     }
 
     @Override
     public void connect(int src, int dest, double w) {
-        if(this.myGraph.containsKey(src)==false)
+        if(this.myGraph.containsKey(src)==false || this.myGraph.containsKey(dest)==false)
         {
             return;
         }
@@ -46,11 +47,13 @@ public class MyDirectedWeightedGraph implements DirectedWeightedGraph{
         {
             MyEdgeData tempMyEdge = new MyEdgeData(src, w ,dest);
             this.myGraph.get(src).addEdge(tempMyEdge);
+            this.edgesSize++;
         }
         else
         {
             this.myGraph.get(src).getEdge(dest).setWeight(w);
         }
+        this.mc++;
     }
 
     @Override
