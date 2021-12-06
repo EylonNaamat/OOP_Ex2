@@ -12,6 +12,7 @@ public class MyGeoLocation implements GeoLocation{
         this.y=ny;
         this.z=nz;
     }
+
     public MyGeoLocation(String st)
     {
         String arr[]= st.split(",");

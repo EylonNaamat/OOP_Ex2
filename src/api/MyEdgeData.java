@@ -8,6 +8,7 @@ public class MyEdgeData implements EdgeData{
     private String info;
     private int tag;
 
+
     public MyEdgeData(int nsrc , double nwidth, int ndest)
     {
         this.src = nsrc;
