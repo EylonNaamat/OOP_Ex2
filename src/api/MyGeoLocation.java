@@ -6,11 +6,11 @@ public class MyGeoLocation implements GeoLocation{
     private double y;
     private double z;
 
-    public MyGeoLocation(double Nx, double Ny, double Nz)
+    public MyGeoLocation(double nx, double ny, double nz)
     {
-        this.x=Nx;
-        this.y=Ny;
-        this.z=Nz;
+        this.x=nx;
+        this.y=ny;
+        this.z=nz;
     }
     @Override
     public double x() {
