@@ -1,19 +1,30 @@
 package api;
 
 public class MyEdgeData implements EdgeData{
+
+    private int src;
+    private int dest;
+    private double width;
+
+    public MyEdgeData(int Nsrc , double Nwidth, int Ndest)
+    {
+        this.src=Nsrc;
+        this.dest=Ndest;
+        this.width=Nwidth;
+    }
     @Override
     public int getSrc() {
-        return 0;
+        return this.src;
     }
 
     @Override
     public int getDest() {
-        return 0;
+        return this.dest;
     }
 
     @Override
     public double getWeight() {
-        return 0;
+        return this.width;
     }
 
     @Override
