@@ -5,6 +5,8 @@ import java.util.Iterator;
 
 public class MyDirectedWeightedGraph implements DirectedWeightedGraph{
 
+    // private HashMap<Integer, HashMap<Integer, EdgeData>> myNode;
+
     private HashMap<Integer, MyNodeData> myGraph;
     private int edgesSize;
     private int nodesSize;
@@ -57,7 +59,8 @@ public class MyDirectedWeightedGraph implements DirectedWeightedGraph{
 
     @Override
     public Iterator<NodeData> nodeIter() {
-        return null;
+        IteratorNode iter = new IteratorNode(this.myGraph.values().iterator());
+        return iter;
     }
 
     @Override
