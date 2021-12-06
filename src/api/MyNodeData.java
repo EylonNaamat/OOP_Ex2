@@ -15,8 +15,7 @@ public class MyNodeData implements NodeData {
         this.info = "default";
         this.tag = 0;
     }
-
-
+    
     public MyNodeData(NodeData n) {
         this.id = n.getKey();
         this.pos = new MyGeoLocation(n.getLocation());
