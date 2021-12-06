@@ -2,7 +2,7 @@ package api;
 
 import java.util.Iterator;
 
-public class MyDirectedWieghtedGraph implements DirectedWeightedGraph{
+public class MyDirectedWeightedGraph implements DirectedWeightedGraph{
 
 
     @Override
