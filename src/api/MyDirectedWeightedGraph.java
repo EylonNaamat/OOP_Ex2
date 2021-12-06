@@ -75,6 +75,7 @@ public class MyDirectedWeightedGraph implements DirectedWeightedGraph{
     public NodeData removeNode(int key) {
         if(this.myGraph.containsKey(key)==true)
         {
+            this.mc++;
             return this.myGraph.remove(key);
         }
         return null;
@@ -84,7 +85,12 @@ public class MyDirectedWeightedGraph implements DirectedWeightedGraph{
     public EdgeData removeEdge(int src, int dest) {
         if(this.myGraph.containsKey(src)==true)
         {
-            return this.myGraph.get(src).removeEdge(dest);
+            EdgeData temp = this.myGraph.get(src).removeEdge(dest);
+            if(temp!=null)
+            {
+                this.mc++;
+            }
+            return temp;
         }
         return null;
     }
