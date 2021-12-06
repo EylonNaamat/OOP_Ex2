@@ -8,11 +8,13 @@ public class MyDirectedWeightedGraph implements DirectedWeightedGraph{
     private HashMap<Integer, MyNodeData> myGraph;
     private int edgesSize;
     private int nodesSize;
+    private int mc;
 
     public MyDirectedWeightedGraph(){
         this.myGraph = new HashMap<>();
         this.edgesSize = 0;
         this.nodesSize = 0;
+        this.mc = 0;
     }
 
     @Override
