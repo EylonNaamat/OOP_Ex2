@@ -11,7 +11,7 @@ public class MyNodeData implements NodeData{
     private int tag;
     private HashMap<Integer, MyEdgeData> nodeMap;
 
-    public MyNodeData(int key, MyGeoLocation location){
+    public MyNodeData(int key, GeoLocation location){
         this.key = key;
         this.location = new MyGeoLocation(location.x(), location.y(), location.z());
         this.weight = 0;

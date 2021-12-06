@@ -24,12 +24,13 @@ public class MyDirectedWeightedGraph implements DirectedWeightedGraph{
 
     @Override
     public EdgeData getEdge(int src, int dest) {
-        return this.myGraph.get(src).;
+        return this.myGraph.get(src).getEdge(dest);
     }
 
     @Override
     public void addNode(NodeData n) {
-
+        MyNodeData temp = new MyNodeData(n.getKey(), n.getLocation());
+        this.myGraph.put(n.getKey(), temp);
     }
 
     @Override
