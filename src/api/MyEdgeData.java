@@ -4,7 +4,7 @@ public class MyEdgeData implements EdgeData{
 
     private int src;
     private int dest;
-    private double width;
+    private double w;
     private String info;
     private int tag;
 
@@ -12,7 +12,7 @@ public class MyEdgeData implements EdgeData{
     {
         this.src = nsrc;
         this.dest = ndest;
-        this.width = nwidth;
+        this.w = nwidth;
         this.info = "defult";
         this.tag = 0;
     }
@@ -28,7 +28,7 @@ public class MyEdgeData implements EdgeData{
 
     @Override
     public double getWeight() {
-        return this.width;
+        return this.w;
     }
 
     @Override

@@ -12,6 +12,19 @@ public class MyGeoLocation implements GeoLocation{
         this.y=ny;
         this.z=nz;
     }
+    public MyGeoLocation(String st)
+    {
+        String arr[]= st.split(",");
+        this.x=Double.parseDouble(arr[0]);
+        this.y=Double.parseDouble(arr[1]);
+        this.z=Double.parseDouble(arr[2]);
+    }
+    public MyGeoLocation(GeoLocation g)
+    {
+        this.x=g.x();
+        this.y=g.y();
+        this.z=g.z();
+    }
     @Override
     public double x() {
         return this.x;

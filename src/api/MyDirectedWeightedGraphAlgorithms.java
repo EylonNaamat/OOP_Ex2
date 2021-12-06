@@ -1,28 +1,46 @@
 package api;
 
+import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 
 public class MyDirectedWeightedGraphAlgorithms implements DirectedWeightedGraphAlgorithms{
 
-    DirectedWeightedGraph myGraph;
+    private MyDirectedWeightedGraph myGraph;
 
-    public MyDirectedWeightedGraphAlgorithms(DirectedWeightedGraph g){
-        this.myGraph=g;
+    public MyDirectedWeightedGraphAlgorithms(){
+        this.myGraph = new MyDirectedWeightedGraph();
     }
 
     @Override
     public void init(DirectedWeightedGraph g) {
+        this.myGraph = new MyDirectedWeightedGraph();
+        Iterator<EdgeData> tempEdgeiter;
+        Iterator<NodeData> tempNodeiter = g.nodeIter();
+        while (tempNodeiter.hasNext()==true)
+        {
+            NodeData tempNode = tempNodeiter.next();
+            this.myGraph.addNode(tempNode);
+            tempEdgeiter = g.edgeIter(tempNode.getKey());
+            while(tempEdgeiter.hasNext()==true)
+            {
+                EdgeData tempEdge = tempEdgeiter.next();
+                this.myGraph.connect(tempEdge.getSrc(),tempEdge.getDest(),tempEdge.getWeight());
+            }
 
+        }
     }
 
     @Override
     public DirectedWeightedGraph getGraph() {
-        return null;
+        return this.myGraph;
     }
 
     @Override
     public DirectedWeightedGraph copy() {
-        return null;
+        MyDirectedWeightedGraphAlgorithms temp = new MyDirectedWeightedGraphAlgorithms();
+        temp.init(this.myGraph);
+        return temp.getGraph();
     }
 
     @Override

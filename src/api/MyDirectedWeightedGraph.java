@@ -33,15 +33,16 @@ public class MyDirectedWeightedGraph implements DirectedWeightedGraph{
 
     @Override
     public void addNode(NodeData n) {
-        this.myNodes.put(n.getKey(), n);
-        this.myEdges.put(n.getKey(),new HashMap<>());
+        NodeData temp = new MyNodeData(n);
+        this.myNodes.put(temp.getKey(), temp);
+        this.myEdges.put(temp.getKey(),new HashMap<>());
         this.nodesSize++;
         this.mc++;
     }
 
     @Override
     public void connect(int src, int dest, double w) {
-        if(this.myNodes.containsKey(src)==false || this.myNodes.containsKey(dest)==false)
+        if(this.myNodes.containsKey(src)==false)
         {
             return;
         }
@@ -64,10 +65,11 @@ public class MyDirectedWeightedGraph implements DirectedWeightedGraph{
     @Override
     public Iterator<EdgeData> edgeIter() {
         List<EdgeData> tempList = new LinkedList<>();
+        Iterator<EdgeData> tempedgeiter;
         Iterator<NodeData> tempnodeiter = this.nodeIter();
         while (tempnodeiter.hasNext()==true)
         {
-            Iterator<EdgeData> tempedgeiter = this.edgeIter(tempnodeiter.next().getKey());
+            tempedgeiter = this.edgeIter(tempnodeiter.next().getKey());
             while(tempedgeiter.hasNext()==true)
             {
                 tempList.add(tempedgeiter.next());

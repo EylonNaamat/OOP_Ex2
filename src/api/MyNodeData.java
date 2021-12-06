@@ -2,33 +2,41 @@ package api;
 
 public class MyNodeData implements NodeData {
 
-    private int key;
-    private GeoLocation location;
+    private int id;
+    private GeoLocation pos;
     private double weight;
     private String info;
     private int tag;
 
-    public MyNodeData(int key, GeoLocation location) {
-        this.key = key;
-        this.location = location;
+    public MyNodeData(int id, GeoLocation location) {
+        this.id = id;
+        this.pos = location;
         this.weight = 0;
         this.info = "default";
         this.tag = 0;
     }
 
+    public MyNodeData(NodeData n) {
+        this.id = n.getKey();
+        this.pos = new MyGeoLocation(n.getLocation());
+        this.weight =n.getWeight() ;
+        this.info =n.getInfo();
+        this.tag =n.getTag();
+    }
+
     @Override
     public int getKey() {
-        return this.key;
+        return this.id;
     }
 
     @Override
     public GeoLocation getLocation() {
-        return this.location;
+        return this.pos;
     }
 
     @Override
     public void setLocation(GeoLocation p) {
-        this.location = p;
+        this.pos = p;
     }
 
     @Override
