@@ -82,4 +82,8 @@ public class MyNodeData implements NodeData{
         }
             return null;
     }
+
+    public int getSize(){
+        return this.nodeMap.size();
+    }
 }
