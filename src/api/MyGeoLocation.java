@@ -29,6 +29,12 @@ public class MyGeoLocation implements GeoLocation{
 
     @Override
     public double distance(GeoLocation g) {
-        return 0;
+        double x = this.x-g.x();
+        x=x*x;
+        double y = this.y-g.y();
+        y=y*y;
+        double z = this.z-g.z();
+        z=z*z;
+        return Math.sqrt(x+y+z);
     }
 }
