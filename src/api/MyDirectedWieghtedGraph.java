@@ -1,9 +1,19 @@
 package api;
 
+import java.util.HashMap;
 import java.util.Iterator;
 
 public class MyDirectedWieghtedGraph implements DirectedWeightedGraph{
+    private HashMap<Integer , MyNodeData> Nodes;
+    private int numNodes;
+    private int numEdge;
 
+    public MyDirectedWieghtedGraph()
+    {
+        this.Nodes= new HashMap<>();
+        this.numEdge=0;
+        this.numNodes=0;
+    }
 
     @Override
     public NodeData getNode(int key) {
