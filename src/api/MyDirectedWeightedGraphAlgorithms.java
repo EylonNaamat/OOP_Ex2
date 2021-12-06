@@ -4,9 +4,10 @@ import java.util.List;
 
 public class MyDirectedWeightedGraphAlgorithms implements DirectedWeightedGraphAlgorithms{
 
-    MyDirectedWeightedGraph myGraph;
+    DirectedWeightedGraph myGraph;
 
-    public MyDirectedWeightedGraphAlgorithms(){
+    public MyDirectedWeightedGraphAlgorithms(DirectedWeightedGraph g){
+        this.myGraph=g;
     }
 
     @Override

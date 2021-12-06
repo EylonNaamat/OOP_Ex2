@@ -1,23 +1,19 @@
 package api;
 
-import java.util.HashMap;
-
-public class MyNodeData implements NodeData{
+public class MyNodeData implements NodeData {
 
     private int key;
-    private MyGeoLocation location;
+    private GeoLocation location;
     private double weight;
     private String info;
     private int tag;
-    private HashMap<Integer, MyEdgeData> nodeMap;
 
-    public MyNodeData(int key, GeoLocation location){
+    public MyNodeData(int key, GeoLocation location) {
         this.key = key;
-        this.location = new MyGeoLocation(location.x(), location.y(), location.z());
+        this.location = location;
         this.weight = 0;
         this.info = "default";
         this.tag = 0;
-        this.nodeMap = new HashMap<>();
     }
 
     @Override
@@ -32,7 +28,7 @@ public class MyNodeData implements NodeData{
 
     @Override
     public void setLocation(GeoLocation p) {
-        this.location = new MyGeoLocation(p.x(), p.y(), p.z());
+        this.location = p;
     }
 
     @Override
@@ -63,27 +59,5 @@ public class MyNodeData implements NodeData{
     @Override
     public void setTag(int t) {
         this.tag = t;
-    }
-
-    public void addEdge(MyEdgeData edge){
-        this.nodeMap.put(edge.getDest(), edge);
-    }
-
-    public MyEdgeData getEdge(int dest){
-        if(this.nodeMap.containsKey(dest) == true){
-            return this.nodeMap.get(dest);
-        }
-        return null;
-    }
-
-    public MyEdgeData removeEdge(int key){
-        if(this.nodeMap.containsKey(key) == true){
-            return this.nodeMap.remove(key);
-        }
-            return null;
-    }
-
-    public int getSize(){
-        return this.nodeMap.size();
     }
 }
