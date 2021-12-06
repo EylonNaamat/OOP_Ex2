@@ -32,7 +32,6 @@ public class MyDirectedWeightedGraph implements DirectedWeightedGraph{
         MyNodeData temp = new MyNodeData(n.getKey(), n.getLocation());
         this.myGraph.put(n.getKey(), temp);
         this.nodesSize++;
-        this.edgesSize++;
         this.mc++;
     }
 
