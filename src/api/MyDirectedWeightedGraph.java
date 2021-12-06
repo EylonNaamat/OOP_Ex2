@@ -32,7 +32,7 @@ public class MyDirectedWeightedGraph implements DirectedWeightedGraph{
         MyNodeData temp = new MyNodeData(n.getKey(), n.getLocation());
         this.myGraph.put(n.getKey(), temp);
         this.nodesSize++;
-        this.edgesSize += this.myGraph.get(n.getKey()).getSize();
+        this.edgesSize++;
         this.mc++;
     }
 
@@ -75,6 +75,8 @@ public class MyDirectedWeightedGraph implements DirectedWeightedGraph{
     public NodeData removeNode(int key) {
         if(this.myGraph.containsKey(key)==true)
         {
+            this.nodesSize--;
+            this.edgesSize -= this.myGraph.get(key).getSize();
             this.mc++;
             return this.myGraph.remove(key);
         }
@@ -89,6 +91,7 @@ public class MyDirectedWeightedGraph implements DirectedWeightedGraph{
             if(temp!=null)
             {
                 this.mc++;
+                this.edgesSize--;
             }
             return temp;
         }
