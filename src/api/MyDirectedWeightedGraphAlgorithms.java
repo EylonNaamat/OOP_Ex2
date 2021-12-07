@@ -1,12 +1,14 @@
 package api;
 
 import com.google.gson.*;
+import org.w3c.dom.Node;
 
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 
 public class MyDirectedWeightedGraphAlgorithms implements DirectedWeightedGraphAlgorithms{
@@ -57,12 +59,30 @@ public class MyDirectedWeightedGraphAlgorithms implements DirectedWeightedGraphA
 
     @Override
     public double shortestPathDist(int src, int dest) {
-        return 0;
+        MyDirectedWeightedGraph temp = this.dijkstraAlgo(src);
+        if(temp.getMyNodes().get(dest).getTag()==-1)
+        {
+            return -1;
+        }
+        return temp.getMyNodes().get(dest).getWeight();
     }
 
     @Override
     public List<NodeData> shortestPath(int src, int dest) {
-        return null;
+        MyDirectedWeightedGraph temp = this.dijkstraAlgo(src);
+        List<NodeData> result = new LinkedList<>();
+        NodeData tempNode = temp.getMyNodes().get(dest);
+        if(tempNode.getTag()==-1)
+        {
+            return null;
+        }
+        while(tempNode.getTag()!=-1)
+        {
+            result.add(tempNode);
+            tempNode=temp.getMyNodes().get(tempNode.getTag());
+        }
+        result.add(tempNode);
+        return result;
     }
 
     @Override
@@ -96,12 +116,12 @@ public class MyDirectedWeightedGraphAlgorithms implements DirectedWeightedGraphA
 
         return false;
     }
-    public MyDirectedWeightedGraph DijkstraAlgo(int src , int dest)
+    public MyDirectedWeightedGraph dijkstraAlgo(int src)
     {
         MyDirectedWeightedGraph results = (MyDirectedWeightedGraph)this.copy();
         for(NodeData nod : results.getMyNodes().values())
         {
-            nod.setTag(0);
+            nod.setTag(-1);
             nod.setWeight(0.0);
             nod.setInfo("W");
         }
@@ -126,7 +146,7 @@ public class MyDirectedWeightedGraphAlgorithms implements DirectedWeightedGraphA
             runNode = null;
             for(NodeData nod : results.getMyNodes().values())
             {
-                if(nod.getInfo() == "W")
+                if((nod.getInfo() == "W")&&(nod.getTag()!=-1))
                 {
                     if(runkey==-1)
                     {
