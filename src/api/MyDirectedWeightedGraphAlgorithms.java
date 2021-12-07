@@ -15,21 +15,7 @@ public class MyDirectedWeightedGraphAlgorithms implements DirectedWeightedGraphA
 
     @Override
     public void init(DirectedWeightedGraph g) {
-        this.myGraph = new MyDirectedWeightedGraph();
-        Iterator<EdgeData> tempEdgeiter;
-        Iterator<NodeData> tempNodeiter = g.nodeIter();
-        while (tempNodeiter.hasNext()==true)
-        {
-            NodeData tempNode = tempNodeiter.next();
-            this.myGraph.addNode(tempNode);
-            tempEdgeiter = g.edgeIter(tempNode.getKey());
-            while(tempEdgeiter.hasNext()==true)
-            {
-                EdgeData tempEdge = tempEdgeiter.next();
-                this.myGraph.connect(tempEdge.getSrc(),tempEdge.getDest(),tempEdge.getWeight());
-            }
-
-        }
+        this.myGraph=(MyDirectedWeightedGraph) g;
     }
 
     @Override
@@ -39,9 +25,22 @@ public class MyDirectedWeightedGraphAlgorithms implements DirectedWeightedGraphA
 
     @Override
     public DirectedWeightedGraph copy() {
-        MyDirectedWeightedGraphAlgorithms temp = new MyDirectedWeightedGraphAlgorithms();
-        temp.init(this.myGraph);
-        return temp.getGraph();
+        MyDirectedWeightedGraph temp = new MyDirectedWeightedGraph();
+        Iterator<EdgeData> tempEdgeiter;
+        Iterator<NodeData> tempNodeiter = this.myGraph.nodeIter();
+        while (tempNodeiter.hasNext()==true)
+        {
+            NodeData tempNode = tempNodeiter.next();
+            temp.addNode(tempNode);
+            tempEdgeiter = this.myGraph.edgeIter(tempNode.getKey());
+            while(tempEdgeiter.hasNext()==true)
+            {
+                EdgeData tempEdge = tempEdgeiter.next();
+                temp.connect(tempEdge.getSrc(),tempEdge.getDest(),tempEdge.getWeight());
+            }
+
+        }
+        return temp;
     }
 
     @Override
