@@ -115,7 +115,7 @@ public class MyDirectedWeightedGraphAlgorithms implements DirectedWeightedGraphA
                 NodeData tempNode = results.getNode(temp.getDest());
                 if(tempNode.getInfo()=="W")
                 {
-                    if((tempNode.getWeight()==0.0||(tempNode.getWeight()>(temp.getWeight()+runNode.getWeight())))
+                    if((tempNode.getWeight()==0.0)||(tempNode.getWeight()>(temp.getWeight()+runNode.getWeight())))
                     {
                         tempNode.setWeight(temp.getWeight()+runNode.getWeight());
                         tempNode.setTag(runkey);
