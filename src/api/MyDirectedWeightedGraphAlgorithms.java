@@ -128,23 +128,33 @@ public class MyDirectedWeightedGraphAlgorithms implements DirectedWeightedGraphA
     @Override
     public List<NodeData> tsp(List<NodeData> cities) {
         List<NodeData> ans = new ArrayList<>();
-        Iterator<NodeData> iter = cities.listIterator();
-        double min = (double)(Integer.MAX_VALUE);
-        for(NodeData city : cities){
-            double shortestPath;
-            List<NodeData> path = new ArrayList<>();
-            for(NodeData nextCity : cities){
-                if(city.getKey() != nextCity.getKey() && ans.contains(nextCity) == false){
-                    shortestPath = shortestPathDist(city.getKey(), nextCity.getKey());
-                    if(shortestPath < min){
-                        min = shortestPath;
-                        path = shortestPath(city.getKey(), nextCity.getKey());
-                    }
+        MyDirectedWeightedGraph tempGrath;
+        NodeData city = cities.get(0);
+        NodeData destcity = city;
+        while((city != null) && (cities.size()!=1))
+        {
+            cities.remove(city);
+            tempGrath = this.dijkstraAlgo(city.getKey());
+            double mindist =0.0;
+            for (NodeData nod : cities)
+            {
+                NodeData tempnode = tempGrath.getMyNodes().get(nod.getKey());
+                if(tempnode.getTag()==-1)
+                {
+                    return null;
+                }
+                if((mindist==0.0)||(tempnode.getWeight()<mindist))
+                {
+                    mindist =tempnode.getWeight();
+                    destcity = nod;
                 }
             }
-            cities.remove(path.get(path.size()-1));
-            ans.addAll(path);
+            ans.addAll(shortestPath(city.getKey(),destcity.getKey()));
+            ans.remove(-1);
+            city=destcity;
+            mindist=0.0;
         }
+        ans.add(city);
         return ans;
     }
 
