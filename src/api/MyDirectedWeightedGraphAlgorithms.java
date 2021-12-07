@@ -96,4 +96,54 @@ public class MyDirectedWeightedGraphAlgorithms implements DirectedWeightedGraphA
 
         return false;
     }
+    public MyDirectedWeightedGraph DijkstraAlgo(int src , int dest)
+    {
+        MyDirectedWeightedGraph results = (MyDirectedWeightedGraph)this.copy();
+        for(NodeData nod : results.getMyNodes().values())
+        {
+            nod.setTag(0);
+            nod.setWeight(0.0);
+            nod.setInfo("W");
+        }
+        int runkey = src;
+        NodeData runNode = results.getNode(runkey);
+        while(runkey!=-1)
+        {
+            runNode.setInfo("B");
+            for(EdgeData temp : results.getMyEdges().get(runkey).values())
+            {
+                NodeData tempNode = results.getNode(temp.getDest());
+                if(tempNode.getInfo()=="W")
+                {
+                    if((tempNode.getWeight()==0.0||(tempNode.getWeight()>(temp.getWeight()+runNode.getWeight())))
+                    {
+                        tempNode.setWeight(temp.getWeight()+runNode.getWeight());
+                        tempNode.setTag(runkey);
+                    }
+                }
+            }
+            runkey=-1;
+            runNode = null;
+            for(NodeData nod : results.getMyNodes().values())
+            {
+                if(nod.getInfo() == "W")
+                {
+                    if(runkey==-1)
+                    {
+                        runkey = nod.getKey();
+                        runNode=nod;
+                    }
+                    else
+                    {
+                        if(nod.getWeight()<runNode.getWeight())
+                        {
+                            runkey = nod.getKey();
+                            runNode=nod;
+                        }
+                    }
+                }
+            }
+        }
+    return results;
+    }
 }
