@@ -1,7 +1,6 @@
 package api;
 
 import com.google.gson.*;
-import org.w3c.dom.Node;
 
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -87,7 +86,22 @@ public class MyDirectedWeightedGraphAlgorithms implements DirectedWeightedGraphA
 
     @Override
     public NodeData center() {
-        return null;
+        double min =-1.0;
+        NodeData maxNode= null;
+        if(this.isConnected()==false)
+        {
+            return null;
+        }
+        for(NodeData nod : this.myGraph.getMyNodes().values())
+        {
+            double temp = maxDist(nod.getKey());
+            if(temp<min||min==-1.0)
+            {
+                min=temp;
+                maxNode=nod;
+            }
+        }
+        return maxNode;
     }
 
     @Override
@@ -116,6 +130,7 @@ public class MyDirectedWeightedGraphAlgorithms implements DirectedWeightedGraphA
 
         return false;
     }
+
     public MyDirectedWeightedGraph dijkstraAlgo(int src)
     {
         MyDirectedWeightedGraph results = (MyDirectedWeightedGraph)this.copy();
@@ -165,5 +180,19 @@ public class MyDirectedWeightedGraphAlgorithms implements DirectedWeightedGraphA
             }
         }
     return results;
+    }
+
+    public double maxDist(int src)
+    {
+        MyDirectedWeightedGraph result = dijkstraAlgo(src);
+        double max = 0 ;
+        for(NodeData nod : result.getMyNodes().values())
+        {
+            if(max<nod.getWeight())
+            {
+                max = nod.getWeight();
+            }
+        }
+        return max;
     }
 }
