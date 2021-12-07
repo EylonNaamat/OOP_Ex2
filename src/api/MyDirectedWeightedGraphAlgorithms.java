@@ -2,8 +2,10 @@ package api;
 
 import com.google.gson.*;
 
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.Iterator;
 import java.util.List;
 
@@ -72,30 +74,24 @@ public class MyDirectedWeightedGraphAlgorithms implements DirectedWeightedGraphA
     }
 
     @Override
-    public boolean save(String file) {
-        Gson gson = new Gson();
-        Iterator<EdgeData> iterEdge = this.myGraph.edgeIter();
-        Iterator<NodeData> iterNode = this.myGraph.nodeIter();
+    public boolean save(String file) { // in the video minute 5:56
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+        String json = gson.toJson(this.myGraph);
         try{
-            FileWriter fw = new FileWriter(file);
-            while(iterEdge.hasNext()) {
-                String jsonEdge = gson.toJson(iterEdge.next());
-                fw.write((gson.toJson(jsonEdge)));
-            }
-            while(iterNode.hasNext()){
-                String jsonNode = gson.toJson(iterNode.next());
-                fw.write((gson.toJson(jsonNode)));
-            }
-            fw.close();
+            PrintWriter pw = new PrintWriter(file);
+            pw.write(json);
+            pw.close();
             return true;
-        }catch (IOException e){
-            e.printStackTrace();
         }
-        return false;
+        catch(FileNotFoundException e){
+            e.printStackTrace();
+            return false;
+        }
     }
 
     @Override
     public boolean load(String file) {
+
         return false;
     }
 }
