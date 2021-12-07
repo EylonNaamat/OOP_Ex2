@@ -1,6 +1,9 @@
 package api;
 
 import com.google.gson.*;
+
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Iterator;
 import java.util.List;
 
@@ -70,6 +73,24 @@ public class MyDirectedWeightedGraphAlgorithms implements DirectedWeightedGraphA
 
     @Override
     public boolean save(String file) {
+        Gson gson = new Gson();
+        Iterator<EdgeData> iterEdge = this.myGraph.edgeIter();
+        Iterator<NodeData> iterNode = this.myGraph.nodeIter();
+        try{
+            FileWriter fw = new FileWriter(file);
+            while(iterEdge.hasNext()) {
+                String jsonEdge = gson.toJson(iterEdge.next());
+                fw.write((gson.toJson(jsonEdge)));
+            }
+            while(iterNode.hasNext()){
+                String jsonNode = gson.toJson(iterNode.next());
+                fw.write((gson.toJson(jsonNode)));
+            }
+            fw.close();
+            return true;
+        }catch (IOException e){
+            e.printStackTrace();
+        }
         return false;
     }
 
