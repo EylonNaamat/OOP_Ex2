@@ -27,7 +27,15 @@ public class MyDirectedWeightedGraph implements DirectedWeightedGraph{
         this.edgesSize = this.myEdges.size();
         this.mc = 0;
     }
-    
+
+    public HashMap<Integer, HashMap<Integer, EdgeData>> getMyEdges() {
+        return this.myEdges;
+    }
+
+    public HashMap<Integer, NodeData> getMyNodes() {
+        return this.myNodes;
+    }
+
     @Override
     public NodeData getNode(int key) {
         return this.myNodes.get(key);
@@ -132,4 +140,27 @@ public class MyDirectedWeightedGraph implements DirectedWeightedGraph{
     public int getMC() {
         return this.mc;
     }
+
+    public void dfs(NodeData node){
+        node.setTag(1);
+        Iterator<EdgeData> iter = this.edgeIter(node.getKey());
+        while(iter.hasNext()){
+            int temp = iter.next().getDest();
+            NodeData tempNode = this.getNode(temp);
+            if(tempNode.getTag() == 0){
+                dfs(tempNode);
+            }
+        }
+    }
+
+    public void setTags(){
+        Iterator<NodeData> iter = this.nodeIter();
+        while(iter.hasNext()){
+            iter.next().setTag(0);
+        }
+    }
+
+//    public MyDirectedWeightedGraph getTranspose(){
+//
+//    }
 }
