@@ -160,7 +160,20 @@ public class MyDirectedWeightedGraph implements DirectedWeightedGraph{
         }
     }
 
-//    public MyDirectedWeightedGraph getTranspose(){
-//
-//    }
+    public MyDirectedWeightedGraph getTranspose(){
+        HashMap<Integer, HashMap<Integer, EdgeData>> newEdges = new HashMap<>();
+        Iterator<NodeData> nodeIter = this.nodeIter();
+        int first = nodeIter.next().getKey();
+        Iterator<EdgeData> edgeIter = this.edgeIter(first);
+        while(nodeIter.hasNext()){
+            while(edgeIter.hasNext()){
+                EdgeData next = edgeIter.next();
+                int tempSrc = nodeIter.next().getKey();
+                int tempDest = next.getDest();
+                newEdges.get(tempDest).put(tempSrc,next);
+            }
+        }
+        MyDirectedWeightedGraph newGraph = new MyDirectedWeightedGraph(this.myNodes, newEdges);
+        return newGraph;
+    }
 }

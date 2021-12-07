@@ -51,7 +51,27 @@ public class MyDirectedWeightedGraphAlgorithms implements DirectedWeightedGraphA
 
     @Override
     public boolean isConnected() {
-        return false;
+        MyDirectedWeightedGraph graph = (MyDirectedWeightedGraph)(this.copy());
+        graph.setTags();
+        Iterator<NodeData> nodeIter = graph.nodeIter();
+        NodeData first = graph.getNode(nodeIter.next().getKey());
+        graph.dfs(first);
+        while(nodeIter.hasNext()){
+            if(nodeIter.next().getTag() == 0){
+                return false;
+            }
+        }
+
+        MyDirectedWeightedGraph transposeGraph = graph.getTranspose();
+        transposeGraph.setTags();
+        Iterator<NodeData> nodeItert = graph.nodeIter();
+        transposeGraph.dfs(first);
+        while(nodeItert.hasNext()){
+            if(nodeItert.next().getTag() == 0){
+                return false;
+            }
+        }
+        return true;
     }
 
     

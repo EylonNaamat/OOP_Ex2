@@ -16,6 +16,15 @@ public class MyEdgeData implements EdgeData{
         this.info = "defult";
         this.tag = 0;
     }
+
+    public MyEdgeData(EdgeData edge){
+        this.src = edge.getSrc();
+        this.dest = edge.getDest();
+        this.w = edge.getWeight();
+        this.info = edge.getInfo();
+        this.tag = edge.getTag();
+    }
+
     @Override
     public int getSrc() {
         return this.src;
