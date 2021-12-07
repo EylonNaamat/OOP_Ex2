@@ -1,11 +1,13 @@
 package api;
 
 import com.google.gson.*;
+import org.w3c.dom.Node;
 
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
@@ -125,7 +127,25 @@ public class MyDirectedWeightedGraphAlgorithms implements DirectedWeightedGraphA
 
     @Override
     public List<NodeData> tsp(List<NodeData> cities) {
-        return null;
+        List<NodeData> ans = new ArrayList<>();
+        Iterator<NodeData> iter = cities.listIterator();
+        double min = (double)(Integer.MAX_VALUE);
+        for(NodeData city : cities){
+            double shortestPath;
+            List<NodeData> path = new ArrayList<>();
+            for(NodeData nextCity : cities){
+                if(city.getKey() != nextCity.getKey() && ans.contains(nextCity) == false){
+                    shortestPath = shortestPathDist(city.getKey(), nextCity.getKey());
+                    if(shortestPath < min){
+                        min = shortestPath;
+                        path = shortestPath(city.getKey(), nextCity.getKey());
+                    }
+                }
+            }
+            cities.remove(path.get(path.size()-1));
+            ans.addAll(path);
+        }
+        return ans;
     }
 
     @Override
