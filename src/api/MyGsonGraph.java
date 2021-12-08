@@ -4,16 +4,12 @@ import com.google.gson.*;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.PrintWriter;
-import java.io.Reader;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.LinkedList;
 import java.util.List;
 
 public class MyGsonGraph {
-    private List<MyEdgeData> Edges;
-    private List<MyNodeData> Nodes;
+    private List<MyGsonEdje> Edges;
+    private List<MyGsonNode> Nodes;
 
     public MyGsonGraph ()
     {
@@ -28,16 +24,16 @@ public class MyGsonGraph {
         {
             for(EdgeData edg : myGraph.getMyEdges().get(nod.getKey()).values())
             {
-                this.Edges.add((MyEdgeData) edg);
+                this.Edges.add(new MyGsonEdje( edg));
             }
-            this.Nodes.add((MyNodeData) nod);
+            this.Nodes.add(new MyGsonNode(nod));
         }
     }
-    public List<MyNodeData> getNodes() {
+    public List<MyGsonNode> getNodes() {
         return this.Nodes;
     }
 
-    public List<MyEdgeData> getEdges() {
+    public List<MyGsonEdje> getEdges() {
         return this.Edges;
     }
 
@@ -49,10 +45,6 @@ public class MyGsonGraph {
             Gson gson = new Gson();
             FileReader myread = new FileReader(fileName);
             MyGsonGraph mygraph = gson.fromJson(myread,MyGsonGraph.class);
-            for(MyNodeData nod : mygraph.Nodes)
-            {
-                nod.setLocation(new MyGeoLocation(nod.getPos()));
-            }
             this.Edges=mygraph.getEdges();
             this.Nodes=mygraph.getNodes();
             return true;

@@ -2,7 +2,6 @@ package api;
 
 public class MyNodeData implements NodeData {
 
-    private String pos;
     private int id;
     private MyGeoLocation location;
     private double weight;
@@ -12,7 +11,6 @@ public class MyNodeData implements NodeData {
     public MyNodeData(int id, MyGeoLocation location) {
         this.id = id;
         this.location = location;
-        this.pos = location.posString();
         this.weight = 0;
         this.info = "default";
         this.tag = 0;
@@ -21,18 +19,9 @@ public class MyNodeData implements NodeData {
     public MyNodeData(NodeData n) {
         this.id = n.getKey();
         this.location = new MyGeoLocation(n.getLocation());
-        this.pos = this.location.posString();
         this.weight =n.getWeight() ;
         this.info =n.getInfo();
         this.tag =n.getTag();
-    }
-    public MyNodeData(String pos, int id) {
-        this.id = id;
-        this.location = new MyGeoLocation(pos);
-        this.pos = this.location.posString();
-        this.weight = 0;
-        this.info = "default";
-        this.tag = 0;
     }
 
     @Override
@@ -80,11 +69,4 @@ public class MyNodeData implements NodeData {
         this.tag = t;
     }
 
-    public String getPos() {
-        return this.pos;
-    }
-
-    public void setPos(String pos) {
-        this.pos = pos;
-    }
 }
