@@ -160,20 +160,38 @@ public class MyDirectedWeightedGraph implements DirectedWeightedGraph{
         }
     }
 
+//    public MyDirectedWeightedGraph getTranspose2(){
+//        MyDirectedWeightedGraph transpose = new MyDirectedWeightedGraph();
+//        Iterator<NodeData> nodeIter = this.nodeIter();
+//        NodeData temp = nodeIter.next();
+//        int first = temp.getKey();
+//        Iterator<EdgeData> edgeIter = this.edgeIter(first);
+//        while(nodeIter.hasNext()){
+//            while(edgeIter.hasNext()){
+//                EdgeData next = edgeIter.next();
+//                int tempSrc = nodeIter.next().getKey();
+//                int tempDest = next.getDest();
+//                newEdges.get(tempDest).put(tempSrc,next);
+//            }
+//        }
+//        MyDirectedWeightedGraph newGraph = new MyDirectedWeightedGraph(this.myNodes, newEdges);
+//        return newGraph;
+//    }
+
     public MyDirectedWeightedGraph getTranspose(){
-        HashMap<Integer, HashMap<Integer, EdgeData>> newEdges = new HashMap<>();
+        MyDirectedWeightedGraph transpose = new MyDirectedWeightedGraph();
+        Iterator<NodeData> Iter = this.nodeIter();
+        while(Iter.hasNext()){
+            transpose.addNode(Iter.next());
+        }
         Iterator<NodeData> nodeIter = this.nodeIter();
-        int first = nodeIter.next().getKey();
-        Iterator<EdgeData> edgeIter = this.edgeIter(first);
         while(nodeIter.hasNext()){
+            Iterator<EdgeData> edgeIter = this.edgeIter(nodeIter.next().getKey());
             while(edgeIter.hasNext()){
-                EdgeData next = edgeIter.next();
-                int tempSrc = nodeIter.next().getKey();
-                int tempDest = next.getDest();
-                newEdges.get(tempDest).put(tempSrc,next);
+                EdgeData temp = edgeIter.next();
+                transpose.connect(temp.getDest(), temp.getSrc(), temp.getWeight());
             }
         }
-        MyDirectedWeightedGraph newGraph = new MyDirectedWeightedGraph(this.myNodes, newEdges);
-        return newGraph;
+        return transpose;
     }
 }

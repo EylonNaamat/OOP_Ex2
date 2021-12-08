@@ -30,105 +30,88 @@ class MyDirectedWeightedGraphTest {
     MyEdgeData ed8 = new MyEdgeData(5,7,6);
     MyEdgeData ed9 = new MyEdgeData(6,25,4);
 
-    HashMap<Integer, NodeData> nodes = new HashMap<>();
-    HashMap<Integer, HashMap<Integer, EdgeData>> edges = new HashMap<>();
-    HashMap<Integer, EdgeData> hash1 = new HashMap<>();
-    HashMap<Integer, EdgeData> hash2 = new HashMap<>();
-    HashMap<Integer, EdgeData> hash3 = new HashMap<>();
-    HashMap<Integer, EdgeData> hash4 = new HashMap<>();
-    HashMap<Integer, EdgeData> hash5 = new HashMap<>();
-    HashMap<Integer, EdgeData> hash6 = new HashMap<>();
-
-    public void insert(){
-        nodes.put(nd1.getKey(), nd1);
-        nodes.put(nd2.getKey(), nd2);
-        nodes.put(nd3.getKey(), nd3);
-        nodes.put(nd4.getKey(), nd4);
-        nodes.put(nd5.getKey(), nd5);
-        nodes.put(nd6.getKey(), nd6);
 
 
-        hash1.put(ed1.getDest(), ed1);
-        hash1.put(ed2.getDest(), ed2);
-        hash1.put(ed3.getDest(), ed3);
-        hash2.put(ed4.getDest(), ed4);
-        hash2.put(ed5.getDest(), ed5);
-        hash4.put(ed6.getDest(), ed6);
-        hash5.put(ed7.getDest(), ed7);
-        hash5.put(ed8.getDest(), ed8);
-        hash6.put(ed9.getDest(), ed9);
+    MyDirectedWeightedGraph g4 = new MyDirectedWeightedGraph();
+    public void insert2(){
+        g4.addNode(nd1);
+        g4.addNode(nd2);
+        g4.addNode(nd3);
+        g4.addNode(nd4);
+        g4.addNode(nd5);
+        g4.addNode(nd6);
 
-        edges.put(nd1.getKey(), hash1);
-        edges.put(nd2.getKey(), hash2);
-        edges.put(nd3.getKey(), hash3);
-        edges.put(nd4.getKey(), hash4);
-        edges.put(nd5.getKey(), hash5);
-        edges.put(nd6.getKey(), hash6);
+        g4.connect(1,2,5);
+        g4.connect(1,3,10);
+        g4.connect(1,4,14);
+        g4.connect(2,5,20);
+        g4.connect(2,3,12);
+        g4.connect(4,3,17);
+        g4.connect(5,1,30);
+        g4.connect(5,6,7);
+        g4.connect(6,4,25);
     }
-    MyDirectedWeightedGraph g2 = new MyDirectedWeightedGraph(nodes, edges);
-
 
     @Test
     void getMyEdges() {
-        insert();
-        HashMap<Integer, HashMap<Integer,EdgeData>> h1 = g2.getMyEdges();
-        assertEquals(h1.get(1).get(2).getWeight(), g2.getMyEdges().get(1).get(2).getWeight());
-        assertEquals(h1.get(2).get(5).getDest(), g2.getMyEdges().get(2).get(5).getDest());
-        assertEquals(h1.get(5).get(1).getSrc(), 5);
+        insert2();
+        assertEquals(5, g4.getMyEdges().get(1).get(2).getWeight());
+        assertEquals(5, g4.getMyEdges().get(2).get(5).getDest());
+        assertEquals(1, g4.getMyEdges().get(5).get(1).getDest());
     }
 
     @Test
     void getMyNodes() {
-        insert();
-        HashMap<Integer, NodeData> h1 = g2.getMyNodes();
-        assertEquals(h1.get(1).getKey(), g2.getMyNodes().get(1).getKey());
-        assertEquals(h1.get(1).getKey(), 1);
-        assertEquals(h1.get(3).getKey(), 3);
+        insert2();
+        assertEquals(1, g4.getMyNodes().get(1).getKey());
+        assertEquals(4.5, g4.getMyNodes().get(2).getLocation().x());
+        assertEquals(11, g4.getMyNodes().get(6).getLocation().y());
     }
 
     @Test
     void getNode() {
-        insert();
-        assertEquals(g2.getNode(3).getLocation().y(), 15.3);
-        assertEquals(g2.getNode(6).getKey(), 6);
-        assertEquals(g2.getNode(7), null);
+        insert2();
+        assertEquals(g4.getNode(3).getLocation().y(), 15.3);
+        assertEquals(g4.getNode(6).getKey(), 6);
+        assertEquals(g4.getNode(7), null);
     }
 
     @Test
     void getEdge() {
-        insert();
-        assertEquals(g2.getEdge(2, 5).getWeight(), 20);
-        assertEquals(g2.getEdge(1,8), null);
-        assertEquals(g2.getEdge(6, 4).getSrc(), 6);
-        assertEquals(g2.getEdge(5,1).getDest(), g2.getEdge(1,2).getSrc());
+        insert2();
+        assertEquals(g4.getEdge(2, 5).getWeight(), 20);
+        assertEquals(g4.getEdge(1,8), null);
+        assertEquals(g4.getEdge(6, 4).getSrc(), 6);
+        assertEquals(g4.getEdge(5,1).getDest(), g4.getEdge(1,2).getSrc());
     }
 
     @Test
     void addNode() {
+        insert2();
         MyGeoLocation l1 = new MyGeoLocation(100,42,0);
         NodeData node1 = new MyNodeData(8, l1);
-        g2.addNode(node1);
-        assertEquals(g2.getNode(8).getLocation().x(), 100);
+        g4.addNode(node1);
+        assertEquals(g4.getNode(8).getLocation().x(), 100);
         MyGeoLocation l2 = new MyGeoLocation(32,7,0);
         NodeData node2 = new MyNodeData(100, l2);
-        g2.addNode(node2);
-        assertEquals(g2.getNode(100).getKey(), 100);
+        g4.addNode(node2);
+        assertEquals(g4.getNode(100).getKey(), 100);
         MyGeoLocation l3 = new MyGeoLocation(8,24,0);
         NodeData node3 = new MyNodeData(100, l3);
-        g2.addNode(node3);
-        assertEquals(g2.getNode(100).getLocation().x(), 8);
-        assertNotEquals(g2.getNode(100).getLocation().x(), 32);
+        g4.addNode(node3);
+        assertEquals(g4.getNode(100).getLocation().x(), 8);
+        assertNotEquals(g4.getNode(100).getLocation().x(), 32);
     }
 
     @Test
     void connect() {
-        insert();
-        g2.connect(1,5, 42);
-        assertEquals(g2.getEdge(1,5).getWeight(), 42);
-        g2.connect(1,5,24);
-        assertNotEquals(g2.getEdge(1,5).getWeight(), 42);
-        g2.connect(6,2,11);
-        assertEquals(g2.getEdge(6,2).getSrc(), 6);
+        insert2();
+        g4.connect(1,5, 42);
+        assertEquals(g4.getEdge(1,5).getWeight(), 42);
+        g4.connect(1,5,24);
+        assertNotEquals(g4.getEdge(1,5).getWeight(), 42);
+        g4.connect(6,2,11);
+        assertEquals(g4.getEdge(6,2).getSrc(), 6);
     }
 
     @Test
@@ -145,63 +128,133 @@ class MyDirectedWeightedGraphTest {
 
     @Test
     void removeNode() {
-        insert();
-        assertEquals(g2.getMyNodes().containsKey(1), true);
-        assertEquals(g2.getMyEdges().containsKey(1), true);
+        insert2();
+        assertEquals(g4.getMyNodes().containsKey(1), true);
+        assertEquals(g4.getMyEdges().containsKey(1), true);
 
-        g2.removeNode(1);
-        assertEquals(g2.getMyNodes().containsKey(1), false);
-        assertEquals(g2.getMyEdges().get(1), null);
-        assertEquals(g2.getMyEdges().containsKey(1), false);
-//        assertEquals(g2.getMyEdges().get(5).get(1), null);
+        g4.removeNode(1);
+        assertEquals(g4.getMyNodes().containsKey(1), false);
+        assertEquals(g4.getMyEdges().get(1), null);
+        assertEquals(g4.getMyEdges().containsKey(1), false);
+        //assertEquals(g4.getMyEdges().get(5).get(1), null);
+
     }
 
     @Test
     void removeEdge() {
-        insert();
-        assertEquals(g2.getEdge(1,3).getSrc(), 1);
-        g2.removeEdge(1,3);
-        assertEquals(g2.getEdge(1,3), null);
-        assertEquals(g2.removeEdge(100,200), null);
+        insert2();
+        assertEquals(g4.getEdge(1,3).getSrc(), 1);
+        g4.removeEdge(1,3);
+        assertEquals(g4.getEdge(1,3), null);
+        assertEquals(g4.removeEdge(100,200), null);
 
-        assertEquals(g2.getEdge(5,1).getDest(), 1);
-        g2.removeEdge(5,1);
-        assertEquals(g2.getEdge(5,1), null);
+        assertEquals(g4.getEdge(5,1).getDest(), 1);
+        g4.removeEdge(5,1);
+        assertEquals(g4.getEdge(5,1), null);
     }
 
     @Test
     void nodeSize() {
-        insert();
-        assertEquals(g2.nodeSize(), 6);
-        g2.removeNode(1);
-        assertEquals(g2.nodeSize(), 5);
-        g2.removeNode(2);
-        assertEquals(g2.nodeSize(), 4);
+        insert2();
+        assertEquals(g4.getMyNodes().size(), 6);
+        assertEquals(g4.nodeSize(), 6);
+        assertEquals(g4.nodeSize(), 6);
+        g4.removeNode(1);
+        assertEquals(g4.nodeSize(), 5);
+        g4.removeNode(2);
+        assertEquals(g4.nodeSize(), 4);
         MyGeoLocation loc = new MyGeoLocation(23,24,0);
         MyNodeData node1 = new MyNodeData(8,loc);
-        g2.addNode(node1);
-        assertEquals(g2.nodeSize(), 5);
+        g4.addNode(node1);
+        assertEquals(g4.nodeSize(), 5);
     }
 
     @Test
     void edgeSize() {
-        insert();
-
+        insert2();
+        assertEquals(g4.edgeSize(), 9);
+        g4.removeEdge(1,3);
+        assertEquals(8, g4.edgeSize());
+        g4.removeEdge(5,1);
+        g4.removeEdge(6,4);
+        assertEquals(g4.edgeSize(), 6);
+        g4.connect(1,6, 23);
+        assertEquals(g4.edgeSize(), 7);
+        g4.removeNode(1);
+        assertEquals(4,g4.edgeSize());
     }
 
     @Test
     void getMC() {
+        insert2();
+        assertEquals(g4.getMC(), 15);
+        MyGeoLocation loc = new MyGeoLocation(11,12,0);
+        MyNodeData nd = new MyNodeData(8,loc);
+        g4.addNode(nd);
+        assertEquals(g4.getMC(), 16);
+        g4.connect(1,8, 32);
+        assertEquals(g4.getMC(), 17);
+        g4.connect(8,1,13);
+        assertEquals(g4.getMC(), 18);
+        g4.removeNode(6);
+        assertEquals(g4.getMC(), 19);
+        g4.removeEdge(8,1);
+        assertEquals(g4.getMC(), 20);
     }
 
     @Test
     void dfs() {
+        insert2();
+        assertEquals(g4.getNode(1).getTag(), 0);
+        assertEquals(g4.getNode(2).getTag(), 0);
+        assertEquals(g4.getNode(3).getTag(), 0);
+        assertEquals(g4.getNode(4).getTag(), 0);
+        assertEquals(g4.getNode(5).getTag(), 0);
+        assertEquals(g4.getNode(6).getTag(), 0);
+        g4.dfs(nd1);
+        assertEquals(g4.getNode(1).getTag(), 1);
+        assertEquals(g4.getNode(2).getTag(), 1);
+        assertEquals(g4.getNode(3).getTag(), 1);
+        assertEquals(g4.getNode(4).getTag(), 1);
+        assertEquals(g4.getNode(5).getTag(), 1);
+        assertEquals(g4.getNode(6).getTag(), 1);
+        g4.setTags();
+        g4.removeEdge(1,3);
+        g4.removeEdge(2,3);
+        g4.removeEdge(4,3);
+        g4.dfs(nd1);
+        assertEquals(g4.getNode(3).getTag(), 0);
+        assertEquals(g4.getNode(1).getTag(), 1);
+        assertEquals(g4.getNode(2).getTag(), 1);
+        assertEquals(g4.getNode(4).getTag(), 1);
+        assertEquals(g4.getNode(5).getTag(), 1);
+        assertEquals(g4.getNode(6).getTag(), 1);
     }
 
     @Test
     void setTags() {
+        insert2();
+        g4.getNode(1).setTag(1);
+        assertEquals(g4.getNode(1).getTag(), 1);
+        g4.getNode(4).setTag(1);
+        assertEquals(g4.getNode(4).getTag(), 1);
+        g4.setTags();
+        assertEquals(g4.getNode(1).getTag(), 0);
+        assertEquals(g4.getNode(4).getTag(), 0);
+
     }
 
     @Test
     void getTranspose() {
+        insert2();
+        assertEquals(g4.getEdge(5,1).getDest(), 1);
+        assertEquals(g4.getEdge(5,1).getSrc(), 5);
+        assertEquals(g4.getEdge(6,4).getDest(), 4);
+        assertEquals(g4.getEdge(6,4).getSrc(), 6);
+        MyDirectedWeightedGraph transpose = g4.getTranspose();
+        assertEquals(transpose.getEdge(1,5).getDest(), 5);
+        assertEquals(transpose.getEdge(1,5).getSrc(), 1);
+        assertEquals(transpose.getEdge(4,6).getDest(), 6);
+        assertEquals(transpose.getEdge(4,6).getSrc(), 4);
     }
 }
