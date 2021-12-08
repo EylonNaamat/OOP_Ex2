@@ -173,15 +173,13 @@ public class MyDirectedWeightedGraphAlgorithms implements DirectedWeightedGraphA
             return false;
         }
         this.myGraph = new MyDirectedWeightedGraph();
-        for(MyGsonNode nod : tempG.getNodes())
+        for(MyNodeData nod : tempG.getNodes())
         {
-            MyGeoLocation temploc = new MyGeoLocation(nod.getPos());
-            MyNodeData tempNode = new MyNodeData(nod.getId(), temploc);
-            this.myGraph.addNode(tempNode);
+            this.myGraph.addNode(nod);
         }
-        for(MyGsonEdge edg : tempG.getEdges())
+        for(MyEdgeData edg : tempG.getEdges())
         {
-            this.myGraph.connect(edg.getSrc(),edg.getDest(),edg.getW());
+            this.myGraph.connect(edg.getSrc(),edg.getDest(),edg.getWeight());
         }
         return true;
     }

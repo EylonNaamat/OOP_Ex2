@@ -12,8 +12,8 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class MyGsonGraph {
-    private List<MyGsonNode> Nodes;
-    private List<MyGsonEdge> Edges;
+    private List<MyEdgeData> Edges;
+    private List<MyNodeData> Nodes;
 
     public MyGsonGraph ()
     {
@@ -28,18 +28,16 @@ public class MyGsonGraph {
         {
             for(EdgeData edg : myGraph.getMyEdges().get(nod.getKey()).values())
             {
-                MyGsonEdge tempedg = new MyGsonEdge(edg);
-                this.Edges.add(tempedg);
+                this.Edges.add((MyEdgeData) edg);
             }
-            MyGsonNode tempnod = new MyGsonNode(nod);
-            this.Nodes.add(tempnod);
+            this.Nodes.add((MyNodeData) nod);
         }
     }
-    public List<MyGsonNode> getNodes() {
+    public List<MyNodeData> getNodes() {
         return this.Nodes;
     }
 
-    public List<MyGsonEdge> getEdges() {
+    public List<MyEdgeData> getEdges() {
         return this.Edges;
     }
 
@@ -51,6 +49,10 @@ public class MyGsonGraph {
             Gson gson = new Gson();
             FileReader myread = new FileReader(fileName);
             MyGsonGraph mygraph = gson.fromJson(myread,MyGsonGraph.class);
+            for(MyNodeData nod : mygraph.Nodes)
+            {
+                nod.setLocation(new MyGeoLocation(nod.getPos()));
+            }
             this.Edges=mygraph.getEdges();
             this.Nodes=mygraph.getNodes();
             return true;
