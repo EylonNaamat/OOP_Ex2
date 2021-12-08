@@ -186,8 +186,7 @@ class MyDirectedWeightedGraphTest {
     @Test
     void edgeSize() {
         insert();
-        g2.connect(5,4,42);
-        assertEquals(g2.edgeSize(), 1);
+
     }
 
     @Test
