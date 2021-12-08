@@ -3,8 +3,8 @@ package api;
 public class MyEdgeData implements EdgeData{
 
     private int src;
-    private int dest;
     private double w;
+    private int dest;
     private String info;
     private int tag;
 

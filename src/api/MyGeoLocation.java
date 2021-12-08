@@ -50,4 +50,11 @@ public class MyGeoLocation implements GeoLocation{
         z=z*z;
         return Math.sqrt(x+y+z);
     }
+
+    public String posString()
+    {
+        String st = "";
+        st=st+this.x+","+this.y+","+this.z;
+        return st;
+    }
 }

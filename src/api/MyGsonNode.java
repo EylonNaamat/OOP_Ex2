@@ -1,31 +1,57 @@
 package api;
 
-public class MyGsonNode {
-    private int id;
+public class MyGsonNode implements NodeData{
     private String pos;
+    private int id;
 
     public MyGsonNode(NodeData n)
     {
-        this.id = n.getKey();
-        this.pos = "";
-        this.pos = this.pos+n.getLocation().x()+",";
-        this.pos = this.pos+n.getLocation().y()+",";
-        this.pos = this.pos+n.getLocation().z();
+        this.pos = ((MyGeoLocation)n.getLocation()).posString();
+        this.id=n.getKey();
     }
-
-    public int getId() {
+    @Override
+    public int getKey() {
         return this.id;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    @Override
+    public GeoLocation getLocation() {
+        GeoLocation g = new MyGeoLocation(this.pos);
+        return g;
     }
 
-    public String getPos() {
-        return this.pos;
+    @Override
+    public void setLocation(GeoLocation p) {
+        this.pos = ((MyGeoLocation)p).posString();
     }
 
-    public void setPos(String pos) {
-        this.pos = pos;
+    @Override
+    public double getWeight() {
+        return 0;
+    }
+
+    @Override
+    public void setWeight(double w) {
+
+    }
+
+    @Override
+    public String getInfo() {
+        return "defult";
+    }
+
+    @Override
+    public void setInfo(String s) {
+
+    }
+
+    @Override
+    public int getTag() {
+        return 0;
+    }
+
+    @Override
+    public void setTag(int t) {
+
     }
 }

@@ -4,16 +4,12 @@ import com.google.gson.*;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.PrintWriter;
-import java.io.Reader;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.LinkedList;
 import java.util.List;
 
 public class MyGsonGraph {
+    private List<MyGsonEdje> Edges;
     private List<MyGsonNode> Nodes;
-    private List<MyGsonEdge> Edges;
 
     public MyGsonGraph ()
     {
@@ -28,18 +24,16 @@ public class MyGsonGraph {
         {
             for(EdgeData edg : myGraph.getMyEdges().get(nod.getKey()).values())
             {
-                MyGsonEdge tempedg = new MyGsonEdge(edg);
-                this.Edges.add(tempedg);
+                this.Edges.add(new MyGsonEdje( edg));
             }
-            MyGsonNode tempnod = new MyGsonNode(nod);
-            this.Nodes.add(tempnod);
+            this.Nodes.add(new MyGsonNode(nod));
         }
     }
     public List<MyGsonNode> getNodes() {
         return this.Nodes;
     }
 
-    public List<MyGsonEdge> getEdges() {
+    public List<MyGsonEdje> getEdges() {
         return this.Edges;
     }
 

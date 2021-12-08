@@ -1,12 +1,5 @@
 package api;
 
-import com.google.gson.*;
-import org.w3c.dom.Node;
-
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -175,13 +168,11 @@ public class MyDirectedWeightedGraphAlgorithms implements DirectedWeightedGraphA
         this.myGraph = new MyDirectedWeightedGraph();
         for(MyGsonNode nod : tempG.getNodes())
         {
-            MyGeoLocation temploc = new MyGeoLocation(nod.getPos());
-            MyNodeData tempNode = new MyNodeData(nod.getId(), temploc);
-            this.myGraph.addNode(tempNode);
+            this.myGraph.addNode(nod);
         }
-        for(MyGsonEdge edg : tempG.getEdges())
+        for(MyGsonEdje edg : tempG.getEdges())
         {
-            this.myGraph.connect(edg.getSrc(),edg.getDest(),edg.getW());
+            this.myGraph.connect(edg.getSrc(),edg.getDest(),edg.getWeight());
         }
         return true;
     }

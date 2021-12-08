@@ -3,14 +3,14 @@ package api;
 public class MyNodeData implements NodeData {
 
     private int id;
-    private GeoLocation pos;
+    private MyGeoLocation location;
     private double weight;
     private String info;
     private int tag;
 
-    public MyNodeData(int id, GeoLocation location) {
+    public MyNodeData(int id, MyGeoLocation location) {
         this.id = id;
-        this.pos = location;
+        this.location = location;
         this.weight = 0;
         this.info = "default";
         this.tag = 0;
@@ -18,17 +18,10 @@ public class MyNodeData implements NodeData {
     
     public MyNodeData(NodeData n) {
         this.id = n.getKey();
-        this.pos = new MyGeoLocation(n.getLocation());
+        this.location = new MyGeoLocation(n.getLocation());
         this.weight =n.getWeight() ;
         this.info =n.getInfo();
         this.tag =n.getTag();
-    }
-    public MyNodeData(String pos, int id) {
-        this.id = id;
-        this.pos = new MyGeoLocation(pos);
-        this.weight = 0;
-        this.info = "default";
-        this.tag = 0;
     }
 
     @Override
@@ -38,12 +31,12 @@ public class MyNodeData implements NodeData {
 
     @Override
     public GeoLocation getLocation() {
-        return this.pos;
+        return this.location;
     }
 
     @Override
     public void setLocation(GeoLocation p) {
-        this.pos = p;
+        this.location = (MyGeoLocation) p;
     }
 
     @Override
@@ -75,4 +68,5 @@ public class MyNodeData implements NodeData {
     public void setTag(int t) {
         this.tag = t;
     }
+
 }
