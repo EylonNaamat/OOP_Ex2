@@ -160,24 +160,28 @@ public class MyDirectedWeightedGraphAlgorithms implements DirectedWeightedGraphA
 
     @Override
     public boolean save(String file) { // in the video minute 5:56
-        Gson gson = new GsonBuilder().setPrettyPrinting().create();
-        String json = gson.toJson(this.myGraph);
-        try{
-            PrintWriter pw = new PrintWriter(file);
-            pw.write(json);
-            pw.close();
-            return true;
-        }
-        catch(FileNotFoundException e){
-            e.printStackTrace();
-            return false;
-        }
+        MyGsonGraph temp = new MyGsonGraph(this.myGraph);
+        return temp.save(file);
     }
 
     @Override
     public boolean load(String file) {
-
-        return false;
+        MyGsonGraph tempG = new MyGsonGraph();
+        Boolean ans = tempG.load(file);
+        if(ans == false)
+        {
+            return false;
+        }
+        this.myGraph = new MyDirectedWeightedGraph();
+        for(NodeData nod : tempG.getNodes())
+        {
+            this.myGraph.addNode(nod);
+        }
+        for(EdgeData edg : tempG.getEdges())
+        {
+            this.myGraph.connect(edg.getSrc(),edg.getDest(),edg.getWeight());
+        }
+        return true;
     }
 
     public MyDirectedWeightedGraph dijkstraAlgo(int src)

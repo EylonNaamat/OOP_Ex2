@@ -23,6 +23,13 @@ public class MyNodeData implements NodeData {
         this.info =n.getInfo();
         this.tag =n.getTag();
     }
+    public MyNodeData(String pos, int id) {
+        this.id = id;
+        this.pos = new MyGeoLocation(pos);
+        this.weight = 0;
+        this.info = "default";
+        this.tag = 0;
+    }
 
     @Override
     public int getKey() {
