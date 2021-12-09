@@ -40,6 +40,9 @@ public class MyDirectedWeightedGraph implements DirectedWeightedGraph{
 
     @Override
     public EdgeData getEdge(int src, int dest) {
+        if(this.myEdges.get(src) == null){
+            return null;
+        }
         return this.myEdges.get(src).get(dest);
     }
 

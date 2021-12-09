@@ -15,6 +15,10 @@ public class Main {
         System.out.println(graph2.isConnected());
         System.out.println(graph2.center().getKey());
 
+        GenerateGraph gener = new GenerateGraph(1000, 20);
+        DirectedWeightedGraph algo2 = gener.generate();
+
+
 
         Gui_Menu astart = new Gui_Menu();
     }
