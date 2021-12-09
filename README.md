@@ -55,4 +55,26 @@ this class implements the getMC function by returning mc.
 this class also has a dfs function. this function is an iterative dfs. we get a node and adds him to a stack, then run while the stack is not empty, we check if we didnt touch the first node in the stack, if we didnt touch him we change his tag, and then run through all his edges and add the nodes that we didnt touch to the stack.
 </br>
 </br>
-this class also has a setTags function. this function set all the edges 
+this class also has a setTags function. this function set all the nodes' tags to 0.
+</br>
+</br>
+this class also has a getTranspose function. this function returns a transpose graph. we create a new graph, and add all the nodes of the original graph to this graph. then, go through all the edges of the original graph, for every edge we create a new edge by switch the src and dest, and adding it to the transpose graph.
+
+### MyDirectedWeightedGraphAlgorithms
+this class implements the DirectedWeightedGraphAlgorithms interface and its functions. this class has a MyDirectedWeightedGraph graph called myGraph, and a constructor that creates a new MyDirectedWeightedGraph.
+</br>
+</br>
+this class has an init function. this function gets a DirectedWeightedGraph and sets myGraph to it.
+</br>
+</br>
+this class has a getGraph function that return myGraph.
+</br>
+</br>
+this class has a copy function. this function copies myGraph and return the copied graph. we define a new MyDirectedWeightedGraph graph, and for every node of myGraph we copy this node to the copied graph, and by going through all the edges of this node we copy all the edges to the copied graph.
+this function return a deep copy of myGraph.
+</br>
+</br>
+this class has a isConnected function. this function check if myGraph is strongly connected components. in this function we make a copy of myGraph, so we dont mess the original graph. we set all the tags of the nodes in this graph to 0, then we do dfs on the first node of the graph, and then we go through all the nodes in the graph. if there is a node that its tag is 0 it means that the graph is not connected. if not, we creates a transpose graph, sets all the nodes' tag to 0, and do dfs on the first node. then, we go through all the nodes in the transpose graph, if there is a node with tag 0, it means the graph is not connected. if not, it means the graph is SCC.
+</br>
+</br>
+

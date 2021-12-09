@@ -148,10 +148,6 @@ public class MyDirectedWeightedGraph implements DirectedWeightedGraph{
 
 
     public void dfs(NodeData node){
-        Iterator<NodeData> nodeIter = this.nodeIter();
-        while(nodeIter.hasNext()){
-            nodeIter.next().setTag(0);
-        }
         Stack<NodeData> stack = new Stack<>();
         stack.push(node);
         while(stack.isEmpty() == false){
