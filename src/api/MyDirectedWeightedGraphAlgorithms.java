@@ -91,10 +91,10 @@ public class MyDirectedWeightedGraphAlgorithms implements DirectedWeightedGraphA
         }
         while(tempNode.getTag()!=-1)
         {
-            result.add(tempNode);
+            result.add(0,tempNode);
             tempNode=temp.getMyNodes().get(tempNode.getTag());
         }
-        result.add(tempNode);
+        result.add(0,tempNode);
         return result;
     }
 
