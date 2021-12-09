@@ -77,4 +77,19 @@ this function return a deep copy of myGraph.
 this class has a isConnected function. this function check if myGraph is strongly connected components. in this function we make a copy of myGraph, so we dont mess the original graph. we set all the tags of the nodes in this graph to 0, then we do dfs on the first node of the graph, and then we go through all the nodes in the graph. if there is a node that its tag is 0 it means that the graph is not connected. if not, we creates a transpose graph, sets all the nodes' tag to 0, and do dfs on the first node. then, we go through all the nodes in the transpose graph, if there is a node with tag 0, it means the graph is not connected. if not, it means the graph is SCC.
 </br>
 </br>
+this class has a shortestPathDist function. this function gets source and destination and computes the shortest path distance from src to dest. in this function we used the dijkstra algorithm. we created a helper function that called dijkstraAlgo, the function set the info of every node to "w" (it means that this node wasnt visited), the starting shortest path dist is 0 (no path), and the tag will show us the key of the previous node in the path. the algorithm starts to run from the source node and tags him as visited, and update the distance to the neighbour nodes. after that, we take other node that wasnt visited and have the shortest path (not 0) and checks the distance to the neighbour, and if the distance + this node shortest path smaller than the neighbour, we update the neighbour path, and the tag. we will run on all the nodes that we could go to them from the source. and this function returns a new graph that every node in this graph holds the shortest path from the source node. and every node contain the previous node on the path.
+</br>
+with the new graph we can go to the dest node, if the tag is -1 there is no path. else, we return the shortest path that was saved in the dijkstra algorithm.
+</br>
+</br>
+this class has a shortestPath function, this function gets source and destination and returns the shortest path from the source to destination. this function also uses dijkstraAlgo function that returns a graph like we describe in the previous function. after that, we know that every node holds the previous node in the path, so we create a LinkedList and adds the dest node, and every time we add the previous node. until we add the source node.
+</br>
+</br>
+this class has center function, this function checks if the graph is connected, if not returns null, else, we run through all the nodes and for every node we use maxDist function that returns the largest path from other node, by using dijkstraAlgo. if the longest path we will get is shorter than all the previous minimum longest path we update the minimum and save the node. in the end we take the node with shortest longest path and return it as the center.
+</br>
+</br>
+this class has a tsp function, this function gets a list and return another list. we use the greedy algorithm of the traveling salesman problem. we start from the first node in the list given and by using dijkstraAlgo we get a graph that helps us find the node that has the shortest path from this node. we get the path from this node to its closet by using the shortestPath function, and we add it to the answer list, and we remove from the given list the nodes we visited. then we do the same with node that was the closet one to the previous node, until we will visit all the nodes in the given list.
+</br>
+</br>
+for doing save and load from json we created objects that are similar to the objects the json describes. 
 
