@@ -86,7 +86,9 @@ public class Gui_algo implements ActionListener {
     public void actionPerformed(ActionEvent event) {
         if(event.getSource() == this.isConnected)
         {
-
+            String st = Boolean.toString(this.thealgo.isConnected());
+            this.algoframe.dispose();
+            Gui_TextShow tempText =new Gui_TextShow(this.thealgo,st);
         }
         if(event.getSource() == this.shortestPath)
         {
@@ -106,7 +108,8 @@ public class Gui_algo implements ActionListener {
         }
         if(event.getSource() == this.save)
         {
-
+            this.algoframe.dispose();
+            Gui_LoadASave tempGUIsave = new Gui_LoadASave(this.thealgo,"save");
         }
         if(event.getSource() == this.drowgraph)
         {

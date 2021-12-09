@@ -7,22 +7,26 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class Gui_Loadsuccessful implements ActionListener {
+public class Gui_LoadASavesuccessful implements ActionListener {
 
     private int width = 500;
     private int high = 500;
+    private String st;
     private MyDirectedWeightedGraphAlgorithms thealgo;
     private JFrame successfulframe = new JFrame("successful");
-    private JLabel messege = new JLabel("the load");
+    private JLabel messege = new JLabel("the ");
     private JLabel messege2 = new JLabel("was successful:");
     private JButton moveon = new JButton("continue");
 
-    public Gui_Loadsuccessful(MyDirectedWeightedGraphAlgorithms ng)
+    public Gui_LoadASavesuccessful(MyDirectedWeightedGraphAlgorithms ng, String st)
     {
+        this.st = st;
         this.thealgo = ng;
         this.messege.setBounds(120,50,200,50);
         this.messege.setFont(new Font(null,Font.BOLD,30));
+        this.messege.setText("the "+st);
         this.successfulframe.add(this.messege);
+
         this.messege2.setBounds(120,100,300,50);
         this.messege2.setFont(new Font(null,Font.BOLD,30));
         this.successfulframe.add(this.messege2);
