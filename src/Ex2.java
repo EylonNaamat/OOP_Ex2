@@ -1,5 +1,6 @@
 import api.DirectedWeightedGraph;
 import api.DirectedWeightedGraphAlgorithms;
+import api.MyDirectedWeightedGraphAlgorithms;
 
 /**
  * This class is the Main class for Ex2 - your implementation will be tested using this class.
@@ -12,9 +13,9 @@ public class Ex2 {
      */
     public static DirectedWeightedGraph getGrapg(String json_file) {
         DirectedWeightedGraph ans = null;
-        // ****** Add your code here ******
-        //
-        // ********************************
+        DirectedWeightedGraphAlgorithms graph = new MyDirectedWeightedGraphAlgorithms();
+        graph.load(json_file);
+        ans = graph.getGraph();
         return ans;
     }
     /**
@@ -24,9 +25,8 @@ public class Ex2 {
      */
     public static DirectedWeightedGraphAlgorithms getGrapgAlgo(String json_file) {
         DirectedWeightedGraphAlgorithms ans = null;
-        // ****** Add your code here ******
-        //
-        // ********************************
+        ans = new MyDirectedWeightedGraphAlgorithms();
+        ans.load(json_file);
         return ans;
     }
     /**
