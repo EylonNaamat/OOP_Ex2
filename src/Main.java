@@ -8,6 +8,8 @@ public class Main {
         System.out.println(algo.getGraph().nodeSize());
 
 
+
+
         Gui_Menu astart = new Gui_Menu();
     }
 }

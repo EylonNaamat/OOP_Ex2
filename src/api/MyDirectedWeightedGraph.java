@@ -1,9 +1,6 @@
 package api;
 
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 public class MyDirectedWeightedGraph implements DirectedWeightedGraph{
 
@@ -148,14 +145,22 @@ public class MyDirectedWeightedGraph implements DirectedWeightedGraph{
         return this.mc;
     }
 
+
+
     public void dfs(NodeData node){
-        node.setTag(1);
-        Iterator<EdgeData> iter = this.edgeIter(node.getKey());
-        while(iter.hasNext()){
-            int temp = iter.next().getDest();
-            NodeData tempNode = this.getNode(temp);
-            if(tempNode.getTag() == 0){
-                dfs(tempNode);
+        Stack<NodeData> stack = new Stack<>();
+        stack.push(node);
+        while(stack.isEmpty() == false){
+            node = stack.pop();
+            if(node.getTag() == 0){
+                node.setTag(1);
+            }
+            Iterator<EdgeData> iter = this.edgeIter((node.getKey()));
+            while(iter.hasNext()){
+                EdgeData temp = iter.next();
+                if(this.getNode(temp.getDest()).getTag() == 0){
+                    stack.push(this.getNode(temp.getDest()));
+                }
             }
         }
     }

@@ -220,6 +220,8 @@ class MyDirectedWeightedGraphAlgorithmsTest {
         insert3(g2);
         graph1.init(g2);
         assertEquals(graph1.center().getKey(), 4);
+        MyDirectedWeightedGraphAlgorithms graph2 = new MyDirectedWeightedGraphAlgorithms();
+        graph2.load("C:\\Users\\eylon\\IdeaProjects\\OOP_Ex2\\data\\G1.json");
     }
 
     @Test
@@ -293,5 +295,16 @@ class MyDirectedWeightedGraphAlgorithmsTest {
         assertEquals(graph1.shortestPathDist(1,3), graph2.shortestPathDist(1,3));
         assertEquals(graph1.getGraph().nodeSize(), graph2.getGraph().nodeSize());
         assertEquals(graph1.getGraph().edgeSize(), graph2.getGraph().edgeSize());
+        graph2.load("C:\\Users\\eylon\\IdeaProjects\\OOP_Ex2\\data\\G1.json");
+        assertEquals(graph2.center().getKey(), 8);
+        assertEquals(graph2.isConnected(), true);
+        graph2.load("C:\\Users\\eylon\\IdeaProjects\\OOP_Ex2\\data\\G2.json");
+        assertEquals(graph2.center().getKey(), 0);
+        assertEquals(graph2.isConnected(), true);
+        graph2.load("C:\\Users\\eylon\\IdeaProjects\\OOP_Ex2\\data\\G3.json");
+        assertEquals(graph2.center().getKey(), 40);
+        assertEquals(graph2.isConnected(), true);
+
+
     }
 }

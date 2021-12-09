@@ -3,6 +3,7 @@ package api;
 import org.junit.jupiter.api.Test;
 
 import java.util.HashMap;
+import java.util.Iterator;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -116,14 +117,38 @@ class MyDirectedWeightedGraphTest {
 
     @Test
     void nodeIter() {
+        insert2();
+        Iterator<NodeData> iter = g4.nodeIter();
+        int counter = 0;
+        while(iter.hasNext()){
+            counter++;
+            iter.next();
+        }
+        assertEquals(counter, 6);
     }
 
     @Test
     void edgeIter() {
+        insert2();
+        Iterator<EdgeData> iter = g4.edgeIter();
+        int counter = 0;
+        while(iter.hasNext()){
+            counter++;
+            iter.next();
+        }
+        assertEquals(9, counter);
     }
 
     @Test
     void testEdgeIter() {
+        insert2();
+        Iterator<EdgeData> iter = g4.edgeIter(1);
+        int counter = 0;
+        while(iter.hasNext()){
+            counter++;
+            iter.next();
+        }
+        assertEquals(counter, 3);
     }
 
     @Test
