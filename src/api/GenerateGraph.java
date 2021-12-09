@@ -12,22 +12,22 @@ public class GenerateGraph {
         this.edgesNum = edgesNum;
     }
 
-    public DirectedWeightedGraph generate(){
-        MyDirectedWeightedGraph ans = new MyDirectedWeightedGraph();
+    public DirectedWeightedGraphAlgorithms generate(){
+        DirectedWeightedGraphAlgorithms ans = new MyDirectedWeightedGraphAlgorithms();
         Random r = new Random();
         for (int i = 0; i < this.nodesNum; i++) {
             double randX = 35 + r.nextDouble();
             double randy = 32 + r.nextDouble();
             MyGeoLocation loc = new MyGeoLocation(randX, randy, 0.0);
             MyNodeData node = new MyNodeData(i, loc);
-            ans.addNode(node);
+            ans.getGraph().addNode(node);
         }
 
         for (int i = 0; i < this.nodesNum; i++) {
             for (int j = 0; j < this.edgesNum; j++) {
                 int randDest = r.nextInt(this.nodesNum);
                 double randWeight = 1 + r.nextDouble();
-                ans.connect(i, randDest, randWeight);
+                ans.getGraph().connect(i, randDest, randWeight);
             }
         }
         return ans;

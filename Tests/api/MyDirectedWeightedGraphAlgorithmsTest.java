@@ -127,6 +127,14 @@ class MyDirectedWeightedGraphAlgorithmsTest {
     }
 
 
+    GenerateGraph gener1 = new GenerateGraph(1000, 20);
+    DirectedWeightedGraphAlgorithms algo1 = gener1.generate();
+    GenerateGraph gener2 = new GenerateGraph(10000, 20);
+    DirectedWeightedGraphAlgorithms algo2 = gener2.generate();
+    GenerateGraph gener3 = new GenerateGraph(100000, 20);
+    DirectedWeightedGraphAlgorithms algo3 = gener3.generate();
+
+
     @Test
     void init() {
         MyDirectedWeightedGraph g2 = new MyDirectedWeightedGraph();
@@ -175,6 +183,13 @@ class MyDirectedWeightedGraphAlgorithmsTest {
         insert(g3);
         graph1.init(g3);
         assertEquals(graph1.isConnected(), false);
+
+//        graph1.init(algo1.getGraph());
+//        assertEquals(graph1.isConnected(), true);
+//        graph1.init(algo2.getGraph());
+//        assertEquals(graph1.isConnected(), true);
+//        graph1.init(algo3.getGraph());
+//        assertEquals(graph1.isConnected(), true);
     }
 
     @Test
@@ -188,6 +203,13 @@ class MyDirectedWeightedGraphAlgorithmsTest {
         assertEquals(graph1.shortestPathDist(1,2), 11);
         graph1.getGraph().connect(1,2,10);
         assertEquals(graph1.shortestPathDist(1,2), 10);
+
+//        graph1.init(algo1.getGraph());
+//        assertEquals(graph1.shortestPathDist(1,556), 34);
+//        graph1.init(algo2.getGraph());
+//        assertEquals(graph1.shortestPathDist(1,5056), 34);
+//        graph1.init(algo3.getGraph());
+//        assertEquals(graph1.shortestPathDist(1,50506), 34);
     }
 
     @Test
@@ -222,6 +244,13 @@ class MyDirectedWeightedGraphAlgorithmsTest {
         assertEquals(graph1.center().getKey(), 4);
         MyDirectedWeightedGraphAlgorithms graph2 = new MyDirectedWeightedGraphAlgorithms();
         graph2.load("C:\\Users\\eylon\\IdeaProjects\\OOP_Ex2\\data\\G1.json");
+
+//        graph1.init(algo1.getGraph());
+//        assertEquals(graph1.center().getKey(), 34);
+//        graph1.init(algo2.getGraph());
+//        assertEquals(graph1.center().getKey(), 34);
+//        graph1.init(algo3.getGraph());
+//        assertEquals(graph1.center().getKey(), 34);
     }
 
     @Test
@@ -267,6 +296,31 @@ class MyDirectedWeightedGraphAlgorithmsTest {
             assertEquals(ans2.get(i).getKey(), funcAns2.get(i).getKey());
         }
 
+//        graph1.init(algo1.getGraph());
+//        List <NodeData> list = new LinkedList<>();
+//        list.add(graph1.getGraph().getNode(1));
+//        list.add(graph1.getGraph().getNode(5));
+//        list.add(graph1.getGraph().getNode(7));
+//        list.add(graph1.getGraph().getNode(15));
+//        list.add(graph1.getGraph().getNode(8));
+//        assertEquals(graph1.tsp(list).size(), 34);
+//        graph1.init(algo2.getGraph());
+//        List <NodeData> list = new LinkedList<>();
+//        list.add(graph1.getGraph().getNode(1));
+//        list.add(graph1.getGraph().getNode(5));
+//        list.add(graph1.getGraph().getNode(7));
+//        list.add(graph1.getGraph().getNode(15));
+//        list.add(graph1.getGraph().getNode(8));
+//        assertEquals(graph1.tsp(list).size(), 34);
+//        graph1.init(algo3.getGraph());
+//        List <NodeData> list = new LinkedList<>();
+//        list.add(graph1.getGraph().getNode(1));
+//        list.add(graph1.getGraph().getNode(5));
+//        list.add(graph1.getGraph().getNode(7));
+//        list.add(graph1.getGraph().getNode(15));
+//        list.add(graph1.getGraph().getNode(8));
+//        assertEquals(graph1.tsp(list).size(), 34);
+
     }
 
     @Test
@@ -281,6 +335,11 @@ class MyDirectedWeightedGraphAlgorithmsTest {
         assertEquals(graph1.shortestPathDist(1,7), graph2.shortestPathDist(1,7));
         assertEquals(graph1.getGraph().nodeSize(), graph2.getGraph().nodeSize());
         assertEquals(graph1.getGraph().edgeSize(), graph2.getGraph().edgeSize());
+
+//        algo1.save("nodes_1000");
+//        algo2.save("nodes_10000");
+//        algo3.save("nodes_100000");
+
     }
 
     @Test
@@ -305,6 +364,12 @@ class MyDirectedWeightedGraphAlgorithmsTest {
         assertEquals(graph2.center().getKey(), 40);
         assertEquals(graph2.isConnected(), true);
 
+//        graph2.load("C:\\Users\\eylon\\IdeaProjects\\OOP_Ex2\\nodes_1000");
+//        assertEquals(graph2.getGraph().nodeSize(), 1000);
+//        graph2.load("C:\\Users\\eylon\\IdeaProjects\\OOP_Ex2\\nodes_10000");
+//        assertEquals(graph2.getGraph().nodeSize(), 10000);
+//        graph2.load("C:\\Users\\eylon\\IdeaProjects\\OOP_Ex2\\nodes_100000");
+//        assertEquals(graph2.getGraph().nodeSize(), 100000);
 
     }
 }
