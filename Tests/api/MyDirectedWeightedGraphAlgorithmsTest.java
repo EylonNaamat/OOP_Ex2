@@ -258,7 +258,7 @@ class MyDirectedWeightedGraphAlgorithmsTest {
         ans2.add(nd4);
         ans2.add(nd5);
         ans2.add(nd2);
-        List<NodeData> funcAns2 = graph1.tsp(cities);
+        List<NodeData> funcAns2 = graph1.tsp(cities2);
         for (int i = 0; i < funcAns2.size(); i++) {
             System.out.println(funcAns2.get(i).getKey());
         }

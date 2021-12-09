@@ -4,6 +4,7 @@ import api.MyDirectedWeightedGraphAlgorithms;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class Gui_TextForAlgo implements ActionListener {
@@ -26,5 +27,10 @@ public class Gui_TextForAlgo implements ActionListener {
         this.isConnected.addActionListener(this);
         this.isConnected.setBackground(Color.ORANGE);
         this.algoframe.add(this.isConnected);
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+
     }
 }
