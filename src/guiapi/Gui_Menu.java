@@ -54,7 +54,7 @@ public class Gui_Menu implements ActionListener {
         if(event.getSource()==this.loadgraph)
         {
             this.menuframe.dispose();
-            Gui_Load nextGUIload = new Gui_Load();
+            Gui_LoadASave nextGUIload = new Gui_LoadASave(new MyDirectedWeightedGraphAlgorithms(),"load");
 
         }
     }

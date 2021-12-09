@@ -1,21 +1,29 @@
 package guiapi;
 
+import api.MyDirectedWeightedGraphAlgorithms;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class Gui_LoadFail implements ActionListener {
+public class Gui_LoadASaveFail implements ActionListener {
     private int width = 500;
     private int high = 500;
-    private JFrame failframe = new JFrame("successful");
-    private JLabel messege = new JLabel("the load was fail:");
+    private String st;
+    private MyDirectedWeightedGraphAlgorithms thealgo;
+    private JFrame failframe = new JFrame("fail");
+    private JLabel messege = new JLabel();
     private JButton goback = new JButton("try again");
 
-    public Gui_LoadFail()
+    public Gui_LoadASaveFail(MyDirectedWeightedGraphAlgorithms algo,String st)
     {
+        this.st=st;
+        this.thealgo=algo;
+
         this.messege.setBounds(100,80,350,50);
         this.messege.setFont(new Font(null,Font.BOLD,30));
+        this.messege.setText("the " +st+ " was fail");
         this.failframe.add(this.messege);
 
 
@@ -38,7 +46,15 @@ public class Gui_LoadFail implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent event) {
         if (event.getSource() == this.goback) {
-
+            if(this.st=="load") {
+                this.failframe.dispose();
+                Gui_Menu tempGuimenu = new Gui_Menu();
+            }
+            if(this.st == "save")
+            {
+                this.failframe.dispose();
+                Gui_algo tempGUIalgo = new Gui_algo(this.thealgo);
+            }
         }
     }
 }
