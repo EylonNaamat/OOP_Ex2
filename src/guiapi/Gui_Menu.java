@@ -19,6 +19,7 @@ public class Gui_Menu implements ActionListener {
 
     public Gui_Menu()
     {
+
         this.head.setBounds(140,50,150,50);
         this.head.setFont(new Font(null,Font.BOLD,30));
         this.menuframe.add(this.head);
