@@ -51,17 +51,19 @@ public class Gui_Load implements ActionListener {
     public void actionPerformed(ActionEvent event) {
         if(event.getSource()==this.startload)
         {
-            this.puthString.setText("");
             String puth =this.puthString.getText();
             this.thealgo = new MyDirectedWeightedGraphAlgorithms();
             boolean flage = thealgo.load(puth);
             if(flage== true)
             {
+                this.loadframe.dispose();
+                Gui_Loadsuccessful tempGUIsuccessful = new Gui_Loadsuccessful(this.thealgo);
 
             }
             else
             {
-
+                this.loadframe.dispose();
+                Gui_LoadFail tempGUIFail= new Gui_LoadFail();
             }
         }
         if(event.getSource()==this.clean)

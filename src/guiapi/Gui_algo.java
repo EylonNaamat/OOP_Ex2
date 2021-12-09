@@ -19,6 +19,8 @@ public class Gui_algo implements ActionListener {
     private JButton center = new JButton("center");
     private JButton tsp = new JButton("tsp");
     private JButton save = new JButton("save");
+    private JButton loadNew = new JButton("load new graph");
+    private JButton chang = new JButton("change graph");
     private JButton drowgraph = new JButton("Drow graph");
 
     public Gui_algo(MyDirectedWeightedGraphAlgorithms algo) {
@@ -58,7 +60,17 @@ public class Gui_algo implements ActionListener {
         this.save.setBackground(Color.ORANGE);
         this.algoframe.add(this.save);
 
-        this.drowgraph.setBounds(40, 260, 400, 70);
+        this.loadNew.setBounds(10, 260, 220, 50);
+        this.loadNew.addActionListener(this);
+        this.loadNew.setBackground(Color.ORANGE);
+        this.algoframe.add(this.loadNew);
+
+        this.chang.setBounds(260, 260, 220, 50);
+        this.chang.addActionListener(this);
+        this.chang.setBackground(Color.ORANGE);
+        this.algoframe.add(this.chang);
+
+        this.drowgraph.setBounds(40, 330, 400, 70);
         this.drowgraph.addActionListener(this);
         this.drowgraph.setBackground(Color.ORANGE);
         this.algoframe.add(this.drowgraph);

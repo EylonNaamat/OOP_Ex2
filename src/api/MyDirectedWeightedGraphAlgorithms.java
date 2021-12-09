@@ -143,7 +143,7 @@ public class MyDirectedWeightedGraphAlgorithms implements DirectedWeightedGraphA
                 }
             }
             ans.addAll(shortestPath(city.getKey(),destcity.getKey()));
-            ans.remove(-1);
+            ans.remove(ans.size()-1);
             city=destcity;
             mindist=0.0;
         }

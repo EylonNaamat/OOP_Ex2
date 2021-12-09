@@ -1,6 +1,7 @@
 package guiapi;
 
 
+import api.MyDirectedWeightedGraph;
 import api.MyDirectedWeightedGraphAlgorithms;
 
 import javax.swing.*;
@@ -46,11 +47,13 @@ public class Gui_Menu implements ActionListener {
     public void actionPerformed(ActionEvent event) {
         if(event.getSource()==this.newGraph)
         {
-
+            this.menuframe.dispose();
+            Gui_Gfunc nextGUIfunc = new Gui_Gfunc(new MyDirectedWeightedGraph());
         }
         if(event.getSource()==this.loadgraph)
         {
-            System.out.println("load");
+            this.menuframe.dispose();
+            Gui_Load nextGUIload = new Gui_Load();
 
         }
     }
