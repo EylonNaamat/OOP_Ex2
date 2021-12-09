@@ -1,11 +1,15 @@
 package guiapi;
 
+import api.EdgeData;
 import api.MyDirectedWeightedGraph;
+import api.MyDirectedWeightedGraphAlgorithms;
+import api.NodeData;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Iterator;
 
 public class Gui_Gfunc implements ActionListener {
     private int width = 500;
@@ -24,7 +28,7 @@ public class Gui_Gfunc implements ActionListener {
     private JButton getMC = new JButton("getMC");
     private JButton edgeIter = new JButton("edgeIter");
     private JButton nodeIter = new JButton("nodeIter");
-    private JButton goalgo = new JButton("goalgo");
+    private JButton goalgo = new JButton("go to Algo Func");
 
     public Gui_Gfunc(MyDirectedWeightedGraph gr)
     {
@@ -91,7 +95,7 @@ public class Gui_Gfunc implements ActionListener {
 
         this.goalgo.setBounds(260,380,220,50);
         this.goalgo.addActionListener(this);
-        this.goalgo.setBackground(Color.ORANGE);
+        this.goalgo.setBackground(Color.red);
         this.gfuncframe.add(this.goalgo);
 
         this.gfuncframe.setLayout(null);
@@ -108,47 +112,104 @@ public class Gui_Gfunc implements ActionListener {
     public void actionPerformed(ActionEvent event) {
         if(event.getSource() == this.getNode )
         {
-
+            this.gfuncframe.dispose();
+            String st[] ={"id"};
+            Gui_needInPut tempGuigetnode = new Gui_needInPut(this.theGraph,"getNode" ,st);
         }
+
         if(event.getSource() == this.getEdge)
         {
-
+            this.gfuncframe.dispose();
+            String st[] ={"src","dest"};
+            Gui_needInPut tempGuigetEdge = new Gui_needInPut(this.theGraph,"getEdge" ,st);
         }
-        if(event.getSource() == this.getMC )
-        {
 
-        }
-        if(event.getSource() ==this.removeEdge )
-        {
-
-        }
-        if(event.getSource() == this.removeNode)
-        {
-
-        }
         if(event.getSource() == this.addNode)
         {
-
+            this.gfuncframe.dispose();
+            String st[] ={"id","x","y","z"};
+            Gui_needInPut tempGuiaddNOde = new Gui_needInPut(this.theGraph,"addNode" ,st);
         }
         if(event.getSource() == this.connect)
         {
-
+            this.gfuncframe.dispose();
+            String st[] ={"src","width","dest"};
+            Gui_needInPut tempGuiconnect = new Gui_needInPut(this.theGraph,"connect" ,st);
         }
+
+        if(event.getSource() == this.removeNode)
+        {
+            this.gfuncframe.dispose();
+            String st[] ={"id"};
+            Gui_needInPut tempGuiremoveNode = new Gui_needInPut(this.theGraph,"removeNode" ,st);
+        }
+
+        if(event.getSource() ==this.removeEdge )
+        {
+            this.gfuncframe.dispose();
+            String st[] ={"src","dest"};
+            Gui_needInPut tempGuiRemoveEdge = new Gui_needInPut(this.theGraph,"removeEdge" ,st);
+        }
+
+        if(event.getSource() == this.getMC )
+        {
+            this.gfuncframe.dispose();
+            String st = "the number of changes :   "+this.theGraph.getMC();
+            MyDirectedWeightedGraphAlgorithms tempalgo =new MyDirectedWeightedGraphAlgorithms();
+            tempalgo.init(this.theGraph);
+            Gui_TextShow tempGUIgetmc = new Gui_TextShow(tempalgo,st);
+        }
+
         if(event.getSource() == this.edgeSize)
         {
-
+            this.gfuncframe.dispose();
+            String st = "the number of Edjes :   "+this.theGraph.edgeSize();
+            MyDirectedWeightedGraphAlgorithms tempalgo =new MyDirectedWeightedGraphAlgorithms();
+            tempalgo.init(this.theGraph);
+            Gui_TextShow tempGUIgetedjesize = new Gui_TextShow(tempalgo,st);
         }
         if(event.getSource() == this.nodeSize)
         {
-
+            this.gfuncframe.dispose();
+            String st = "the number of Nodes :   "+this.theGraph.nodeSize();
+            MyDirectedWeightedGraphAlgorithms tempalgo =new MyDirectedWeightedGraphAlgorithms();
+            tempalgo.init(this.theGraph);
+            Gui_TextShow tempGUIgetnudesize = new Gui_TextShow(tempalgo,st);
         }
         if(event.getSource() == this.nodeIter)
         {
-
+            this.gfuncframe.dispose();
+            Iterator<NodeData> iternod= this.theGraph.nodeIter();
+            if(iternod.hasNext()==false)
+            {
+                MyDirectedWeightedGraphAlgorithms tempalgo =new MyDirectedWeightedGraphAlgorithms();
+                tempalgo.init(this.theGraph);
+                Gui_TextShow tempGUItext = new Gui_TextShow(tempalgo,"no nudes");
+            }
+            else {
+                Gui_iterNode tempGUIiternode = new Gui_iterNode(this.theGraph, iternod);
+            }
         }
         if(event.getSource() == this.edgeIter)
         {
-
+            this.gfuncframe.dispose();
+            Iterator<EdgeData> iteredge= this.theGraph.edgeIter();
+            if(iteredge.hasNext()==false)
+            {
+                MyDirectedWeightedGraphAlgorithms tempalgo =new MyDirectedWeightedGraphAlgorithms();
+                tempalgo.init(this.theGraph);
+                Gui_TextShow tempGUItext = new Gui_TextShow(tempalgo,"no nudes");
+            }
+            else {
+                Gui_iterEdge tempGUIiternode = new Gui_iterEdge(this.theGraph, iteredge);
+            }
+        }
+        if(event.getSource() == this.goalgo)
+        {
+            this.gfuncframe.dispose();
+            MyDirectedWeightedGraphAlgorithms tempalgo =new MyDirectedWeightedGraphAlgorithms();
+            tempalgo.init(this.theGraph);
+            Gui_algo tempGUIgetnudesize = new Gui_algo(tempalgo);
         }
 
     }
