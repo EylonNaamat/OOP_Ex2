@@ -52,4 +52,7 @@ this class implements the edgeSize function by returning the field edgeSize.
 this class implements the getMC function by returning mc.
 </br>
 </br>
-this class also have a dfs function. this function 
+this class also has a dfs function. this function is an iterative dfs. we get a node and adds him to a stack, then run while the stack is not empty, we check if we didnt touch the first node in the stack, if we didnt touch him we change his tag, and then run through all his edges and add the nodes that we didnt touch to the stack.
+</br>
+</br>
+this class also has a setTags function. this function set all the edges 
