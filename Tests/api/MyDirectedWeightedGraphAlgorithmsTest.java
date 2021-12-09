@@ -255,22 +255,15 @@ class MyDirectedWeightedGraphAlgorithmsTest {
         List<NodeData> ans2 = new LinkedList<>();
         ans2.add(nd1);
         ans2.add(nd3);
-        ans2.add(nd4);
-        ans2.add(nd5);
+        ans2.add(nd1);
         ans2.add(nd2);
-        List<NodeData> funcAns2 = graph1.tsp(cities);
-        for (int i = 0; i < funcAns2.size(); i++) {
-            System.out.println(funcAns2.get(i).getKey());
-        }
-//        assertEquals(ans2.get(0).getKey(), funcAns2.get(0).getKey());
-//        assertEquals(1, funcAns2.get(1).getKey());
-//        assertEquals(ans2.get(2).getKey(), funcAns2.get(2).getKey());
-//        assertEquals(ans2.get(3).getKey(), funcAns2.get(3).getKey());
-//        assertEquals(ans2.get(4).getKey(), funcAns2.get(4).getKey());
+        ans2.add(nd5);
+        ans2.add(nd4);
+        List<NodeData> funcAns2 = graph1.tsp(cities2);
 
-//        for (int i = 0; i < funcAns2.size(); i++) {
-//            assertEquals(ans2.get(i).getKey(), funcAns2.get(i).getKey());
-//        }
+        for (int i = 0; i < funcAns2.size(); i++) {
+            assertEquals(ans2.get(i).getKey(), funcAns2.get(i).getKey());
+        }
 
     }
 

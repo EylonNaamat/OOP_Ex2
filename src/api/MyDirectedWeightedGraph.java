@@ -108,7 +108,10 @@ public class MyDirectedWeightedGraph implements DirectedWeightedGraph{
             this.mc++;
             for(int destnod : this.myNodes.keySet())
             {
-                this.removeEdge(destnod,key);
+                if(this.removeEdge(destnod,key)!=null)
+                {
+                    this.mc--;
+                }
             }
             this.myEdges.remove(key);
             return this.myNodes.remove(key);
