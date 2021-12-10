@@ -18,6 +18,6 @@ public class Main {
 
 
 
-        //Gui_Menu astart = new Gui_Menu();
+        Gui_Menu astart = new Gui_Menu();
     }
 }
