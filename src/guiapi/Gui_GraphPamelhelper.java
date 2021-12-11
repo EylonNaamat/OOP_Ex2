@@ -69,6 +69,7 @@ public class Gui_GraphPamelhelper extends JPanel {
             tempx = (tempx*deltax)+20;
             tempy = nod.getLocation().y()-ymin;
             tempy =(tempy*deltay)+20;
+            drower.drawOval((int)tempx,(int) tempy,40,40);
             for(EdgeData edg : this.myGraph.getMyEdges().get(nod.getKey()).values())
             {
                 drower.setPaint(tempcolor);
@@ -78,11 +79,9 @@ public class Gui_GraphPamelhelper extends JPanel {
                 tempy2 = nod2.getLocation().y()-ymin;
                 tempy2= (tempy2*deltay)+20;
                 drower.drawLine((int)tempx+20,(int)tempy+30,(int)tempx2+20,(int)tempy2+10);
-                drower.drawOval((int)tempx,(int) tempy,20,20);
                 drower.drawString(Double.toString(edg.getWeight()),(int)((tempx+tempx2+60)/2),(int)((tempy+tempy2+40)/2));
             }
             drower.setPaint(Color.black);
-            drower.drawOval((int)tempx,(int) tempy,40,40);
             drower.drawString(Integer.toString(nod.getKey()),(int)tempx+10,(int)tempy+20);
 
         }
