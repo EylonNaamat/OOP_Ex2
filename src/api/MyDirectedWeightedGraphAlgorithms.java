@@ -1,22 +1,21 @@
 package api;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
+import org.w3c.dom.Node;
 
-public class MyDirectedWeightedGraphAlgorithms implements DirectedWeightedGraphAlgorithms{
+import java.util.*;
+
+public class MyDirectedWeightedGraphAlgorithms implements DirectedWeightedGraphAlgorithms {
 
 
     private MyDirectedWeightedGraph myGraph;
 
-    public MyDirectedWeightedGraphAlgorithms(){
+    public MyDirectedWeightedGraphAlgorithms() {
         this.myGraph = new MyDirectedWeightedGraph();
     }
 
     @Override
     public void init(DirectedWeightedGraph g) {
-        this.myGraph=(MyDirectedWeightedGraph) g;
+        this.myGraph = (MyDirectedWeightedGraph) g;
     }
 
     @Override
@@ -29,15 +28,13 @@ public class MyDirectedWeightedGraphAlgorithms implements DirectedWeightedGraphA
         MyDirectedWeightedGraph temp = new MyDirectedWeightedGraph();
         Iterator<EdgeData> tempEdgeiter;
         Iterator<NodeData> tempNodeiter = this.myGraph.nodeIter();
-        while (tempNodeiter.hasNext()==true)
-        {
+        while (tempNodeiter.hasNext() == true) {
             NodeData tempNode = tempNodeiter.next();
             temp.addNode(tempNode);
             tempEdgeiter = this.myGraph.edgeIter(tempNode.getKey());
-            while(tempEdgeiter.hasNext()==true)
-            {
+            while (tempEdgeiter.hasNext() == true) {
                 EdgeData tempEdge = tempEdgeiter.next();
-                temp.connect(tempEdge.getSrc(),tempEdge.getDest(),tempEdge.getWeight());
+                temp.connect(tempEdge.getSrc(), tempEdge.getDest(), tempEdge.getWeight());
             }
 
         }
@@ -46,13 +43,13 @@ public class MyDirectedWeightedGraphAlgorithms implements DirectedWeightedGraphA
 
     @Override
     public boolean isConnected() {
-        MyDirectedWeightedGraph graph = (MyDirectedWeightedGraph)(this.copy());
+        MyDirectedWeightedGraph graph = (MyDirectedWeightedGraph) (this.copy());
         graph.setTags();
         Iterator<NodeData> nodeIter = graph.nodeIter();
         NodeData first = graph.getNode(nodeIter.next().getKey());
         graph.dfs(first);
-        while(nodeIter.hasNext()){
-            if(nodeIter.next().getTag() == 0){
+        while (nodeIter.hasNext()) {
+            if (nodeIter.next().getTag() == 0) {
                 return false;
             }
         }
@@ -61,20 +58,19 @@ public class MyDirectedWeightedGraphAlgorithms implements DirectedWeightedGraphA
         transposeGraph.setTags();
         Iterator<NodeData> nodeItert = graph.nodeIter();
         transposeGraph.dfs(first);
-        while(nodeItert.hasNext()){
-            if(nodeItert.next().getTag() == 0){
+        while (nodeItert.hasNext()) {
+            if (nodeItert.next().getTag() == 0) {
                 return false;
             }
         }
         return true;
     }
 
-    
+
     @Override
     public double shortestPathDist(int src, int dest) {
         MyDirectedWeightedGraph temp = this.dijkstraAlgo(src);
-        if(temp.getMyNodes().get(dest).getTag()==-1)
-        {
+        if (temp.getMyNodes().get(dest).getTag() == -1) {
             return -1;
         }
         return temp.getMyNodes().get(dest).getWeight();
@@ -85,34 +81,29 @@ public class MyDirectedWeightedGraphAlgorithms implements DirectedWeightedGraphA
         MyDirectedWeightedGraph temp = this.dijkstraAlgo(src);
         List<NodeData> result = new LinkedList<>();
         NodeData tempNode = temp.getMyNodes().get(dest);
-        if(tempNode.getTag()==-1)
-        {
+        if (tempNode.getTag() == -1) {
             return null;
         }
-        while(tempNode.getTag()!=-1)
-        {
-            result.add(0,tempNode);
-            tempNode=temp.getMyNodes().get(tempNode.getTag());
+        while (tempNode.getTag() != -1) {
+            result.add(0, tempNode);
+            tempNode = temp.getMyNodes().get(tempNode.getTag());
         }
-        result.add(0,tempNode);
+        result.add(0, tempNode);
         return result;
     }
 
     @Override
     public NodeData center() {
-        double min =-1.0;
-        NodeData maxNode= null;
-        if(this.isConnected()==false)
-        {
+        double min = -1.0;
+        NodeData maxNode = null;
+        if (this.isConnected() == false) {
             return null;
         }
-        for(NodeData nod : this.myGraph.getMyNodes().values())
-        {
+        for (NodeData nod : this.myGraph.getMyNodes().values()) {
             double temp = maxDist(nod.getKey());
-            if(temp<min||min==-1.0)
-            {
-                min=temp;
-                maxNode=nod;
+            if (temp < min || min == -1.0) {
+                min = temp;
+                maxNode = nod;
             }
         }
         return maxNode;
@@ -124,28 +115,24 @@ public class MyDirectedWeightedGraphAlgorithms implements DirectedWeightedGraphA
         MyDirectedWeightedGraph tempGrath;
         NodeData city = cities.get(0);
         NodeData destcity = city;
-        while((city != null) && (cities.size()!=1))
-        {
+        while ((city != null) && (cities.size() != 1)) {
             cities.remove(city);
             tempGrath = this.dijkstraAlgo(city.getKey());
-            double mindist =0.0;
-            for (NodeData nod : cities)
-            {
+            double mindist = 0.0;
+            for (NodeData nod : cities) {
                 NodeData tempnode = tempGrath.getMyNodes().get(nod.getKey());
-                if(tempnode.getTag()==-1)
-                {
+                if (tempnode.getTag() == -1) {
                     return null;
                 }
-                if((mindist==0.0)||(tempnode.getWeight()<mindist))
-                {
-                    mindist =tempnode.getWeight();
+                if ((mindist == 0.0) || (tempnode.getWeight() < mindist)) {
+                    mindist = tempnode.getWeight();
                     destcity = nod;
                 }
             }
-            ans.addAll(shortestPath(city.getKey(),destcity.getKey()));
-            ans.remove(ans.size()-1);
-            city=destcity;
-            mindist=0.0;
+            ans.addAll(shortestPath(city.getKey(), destcity.getKey()));
+            ans.remove(ans.size() - 1);
+            city = destcity;
+            mindist = 0.0;
 
         }
         ans.add(city);
@@ -162,23 +149,57 @@ public class MyDirectedWeightedGraphAlgorithms implements DirectedWeightedGraphA
     public boolean load(String file) {
         MyGsonGraph tempG = new MyGsonGraph();
         Boolean ans = tempG.load(file);
-        if(ans == false)
-        {
+        if (ans == false) {
             return false;
         }
         this.myGraph = new MyDirectedWeightedGraph();
-        for(MyGsonNode nod : tempG.getNodes())
-        {
+        for (MyGsonNode nod : tempG.getNodes()) {
             this.myGraph.addNode(nod);
         }
-        for(MyGsonEdje edg : tempG.getEdges())
-        {
-            this.myGraph.connect(edg.getSrc(),edg.getDest(),edg.getWeight());
+        for (MyGsonEdje edg : tempG.getEdges()) {
+            this.myGraph.connect(edg.getSrc(), edg.getDest(), edg.getWeight());
         }
         return true;
     }
 
     public MyDirectedWeightedGraph dijkstraAlgo(int src)
+    {
+        PriorityQueue<NodeData> minheap = new PriorityQueue<>((n2, n1) -> Double.compare(n2.getWeight(),n1.getWeight()));
+        for(NodeData nod : this.myGraph.getMyNodes().values())
+        {
+            nod.setTag(-1);
+            nod.setWeight(Double.MAX_VALUE);
+            nod.setInfo("W");
+            minheap.add(nod);
+        }
+        NodeData runNode = this.myGraph.getNode(src);
+        minheap.remove(runNode);
+        runNode.setWeight(0.0);
+        while(runNode!=null)
+        {
+            runNode.setInfo("B");
+            for (EdgeData temp : this.myGraph.getMyEdges().get(runNode.getKey()).values()) {
+                NodeData tempNode =this.myGraph.getNode(temp.getDest());
+                if (tempNode.getInfo() == "W") {
+                    if (tempNode.getWeight() > (temp.getWeight() + runNode.getWeight())) {
+                        minheap.remove(tempNode);
+                        tempNode.setWeight(temp.getWeight() + runNode.getWeight());
+                        tempNode.setTag(runNode.getKey());
+                        minheap.add(tempNode);
+                    }
+                }
+            }
+
+            runNode = minheap.poll();
+            if(runNode!=null) {
+                if (runNode.getTag() == -1) {
+                   runNode = null;
+                }
+            }
+        }
+        return this.myGraph;
+    }
+    public MyDirectedWeightedGraph dijkstraAlgo1(int src)
     {
         MyDirectedWeightedGraph results = (MyDirectedWeightedGraph)this.copy();
         for(NodeData nod : results.getMyNodes().values())
@@ -235,7 +256,7 @@ public class MyDirectedWeightedGraphAlgorithms implements DirectedWeightedGraphA
         double max = 0 ;
         for(NodeData nod : result.getMyNodes().values())
         {
-            if(max<nod.getWeight())
+            if((max<nod.getWeight())&&(nod.getWeight()!=Double.MAX_VALUE))
             {
                 max = nod.getWeight();
             }
