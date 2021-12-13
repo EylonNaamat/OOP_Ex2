@@ -1,11 +1,13 @@
 package guiapi;
 
 import api.*;
+import org.w3c.dom.Node;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 
 public class Gui_needInPut implements ActionListener {
 
@@ -161,6 +163,16 @@ public class Gui_needInPut implements ActionListener {
                 st = st + (tempalgo.shortestPathDist(inputsrc,inputdest));
                 this.actionframe.dispose();
                 Gui_TextShow tempText =new Gui_TextShow(tempalgo,st);
+            }
+            if(this.active == "shortestPath")
+            {
+                MyDirectedWeightedGraphAlgorithms tempalgo =new MyDirectedWeightedGraphAlgorithms();
+                tempalgo.init(this.mygraph);
+                int inputsrc = Integer.parseInt(this.input[0].getText());
+                int inputdest = Integer.parseInt(this.input[1].getText());
+                List<NodeData> ndlist = tempalgo.shortestPath(inputsrc,inputdest);
+                this.actionframe.dispose();
+                new Gui_MyGraphDrow(tempalgo,ndlist);
             }
         }
     }

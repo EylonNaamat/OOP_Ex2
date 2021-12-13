@@ -2,11 +2,14 @@ package guiapi;
 
 import api.MyDirectedWeightedGraph;
 import api.MyDirectedWeightedGraphAlgorithms;
+import api.NodeData;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.LinkedList;
+import java.util.List;
 
 public class Gui_algo implements ActionListener {
     private int width = 500;
@@ -93,6 +96,10 @@ public class Gui_algo implements ActionListener {
         }
         if(event.getSource() == this.shortestPath)
         {
+            String[] arr = {"src","dest"};
+            this.algoframe.dispose();
+            MyDirectedWeightedGraph dg = (MyDirectedWeightedGraph)this.thealgo.getGraph();
+            Gui_needInPut tempGUIdist = new Gui_needInPut(dg,"shortestPath",arr);
 
         }
         if(event.getSource() == this.shortestPathDist)
@@ -104,7 +111,10 @@ public class Gui_algo implements ActionListener {
         }
         if(event.getSource() == this.center)
         {
-
+            List<NodeData> lst = new LinkedList<>();
+            lst.add(this.thealgo.center());
+            this.algoframe.dispose();
+            new Gui_MyGraphDrow(this.thealgo,lst);
         }
         if(event.getSource() == this.tsp)
         {
@@ -128,7 +138,8 @@ public class Gui_algo implements ActionListener {
         }
         if(event.getSource() == this.drowgraph)
         {
-
+            this.algoframe.dispose();
+            new Gui_MyGraphDrow(this.thealgo, new LinkedList<>());
         }
     }
 }
