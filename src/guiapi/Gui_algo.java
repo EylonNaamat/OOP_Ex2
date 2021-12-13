@@ -27,6 +27,7 @@ public class Gui_algo implements ActionListener {
     private JButton chang = new JButton("change graph");
     private JButton drowgraph = new JButton("Drow graph");
 
+
     public Gui_algo(MyDirectedWeightedGraphAlgorithms algo) {
         this.thealgo = algo;
 

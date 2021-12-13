@@ -103,6 +103,7 @@ public class Gui_Gfunc implements ActionListener {
         this.gfuncframe.getContentPane().setBackground(Color.gray);
         this.gfuncframe.setVisible(true);
         this.gfuncframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
     }
     public JFrame getframe()
     {
