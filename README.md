@@ -92,4 +92,42 @@ this class has a tsp function, this function gets a list and return another list
 </br>
 </br>
 for doing save and load from json we created objects that are similar to the objects the json describes. 
+</br>
+</br>
+### Algorithms Performance Analysis
+For testing the algorithms performance we have created a graph generating class called GenerateGraph. the constructor of this class gets a node number and a number of edges. it has a function called generate, this function generates a graph with the number of nodes given, and every node has a random edges, the degree of every node is the number of edges given.
+</br>
+we have created a 1,000, 10,000 , 100,000 node graphs (we couldn't create a 1,000,000 nodes graph because we got a heapspace error), that each node has a degree of 20. then, we tested the next algorithms:
+</br>
+1. isConnected
+2. shortestPathDist
+3. center
+4. tsp
+5. save
+6. load
+</br>
 
+The results were: </br>
+isConnected with 1,000 nodes - 86 ms. </br>
+isConnected with 10,000 nodes - 706 ms. </br>
+isConnected with 100,000 nodes - 6 sec 169 ms. </br>
+
+shortestPathDist with 1,000 nodes - 46 ms. </br>
+shortestPathDist with 10,000 nodes - 210 ms. </br>
+shortestPathDist with 100,000 nodes - 4 sec 197 ms. </br>
+
+center with 1,000 nodes - 2 sec 576 ms. </br>
+center with 10,000 nodes - didnt finish. </br>
+center with 100,000 nodes - didnt finish. </br>
+
+tsp with 1,000 nodes - 74 ms. </br>
+tsp with 10,000 nodes - 653 ms. </br>
+tsp with 100,000 nodes - 27 sec 774 ms. </br>
+
+save with 1,000 nodes - 235 ms. </br>
+save with 10,000 nodes - 645 ms. </br>
+save with 100,000 nodes - 4 sec 262 ms. </br>
+
+load with 1,000 nodes - 265 ms, </br>
+load with 10,000 nodes - 582 ms. </br>
+load with 100,000 nodes - 3 sec 191 ms. </br>

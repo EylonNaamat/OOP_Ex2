@@ -1,6 +1,7 @@
 import api.DirectedWeightedGraph;
 import api.DirectedWeightedGraphAlgorithms;
 import api.MyDirectedWeightedGraphAlgorithms;
+import guiapi.Gui_MyGraphDrow;
 
 /**
  * This class is the Main class for Ex2 - your implementation will be tested using this class.
@@ -36,8 +37,13 @@ public class Ex2 {
      */
     public static void runGUI(String json_file) {
         DirectedWeightedGraphAlgorithms alg = getGrapgAlgo(json_file);
-        // ****** Add your code here ******
-        //
-        // ********************************
+        MyDirectedWeightedGraphAlgorithms algo = (MyDirectedWeightedGraphAlgorithms)(alg);
+        new Gui_MyGraphDrow(algo);
+    }
+
+    public static void main(String[] args) {
+        if(args.length > 0){
+            runGUI(args[0]);
+        }
     }
 }

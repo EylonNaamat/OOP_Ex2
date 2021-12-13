@@ -133,6 +133,8 @@ class MyDirectedWeightedGraphAlgorithmsTest {
     DirectedWeightedGraphAlgorithms algo2 = gener2.generate();
     GenerateGraph gener3 = new GenerateGraph(100000, 20);
     DirectedWeightedGraphAlgorithms algo3 = gener3.generate();
+    GenerateGraph gener4 = new GenerateGraph(1000000, 20);
+    DirectedWeightedGraphAlgorithms algo4 = gener4.generate();
 
 
     @Test
@@ -190,6 +192,8 @@ class MyDirectedWeightedGraphAlgorithmsTest {
 //        assertEquals(graph1.isConnected(), true);
 //        graph1.init(algo3.getGraph());
 //        assertEquals(graph1.isConnected(), true);
+//        graph1.init(algo4.getGraph());
+//        assertEquals(graph1.isConnected(), true);
     }
 
     @Test
@@ -210,6 +214,11 @@ class MyDirectedWeightedGraphAlgorithmsTest {
 //        assertEquals(graph1.shortestPathDist(1,5056), 34);
 //        graph1.init(algo3.getGraph());
 //        assertEquals(graph1.shortestPathDist(1,50506), 34);
+
+
+//        graph1.load("C:\\Users\\eylon\\IdeaProjects\\OOP_Ex2\\nodes_1000");
+////        assertEquals(graph1.shortestPathDist(1,556), 34);
+
     }
 
     @Test
@@ -244,13 +253,19 @@ class MyDirectedWeightedGraphAlgorithmsTest {
         assertEquals(graph1.center().getKey(), 4);
         MyDirectedWeightedGraphAlgorithms graph2 = new MyDirectedWeightedGraphAlgorithms();
         graph2.load("C:\\Users\\eylon\\IdeaProjects\\OOP_Ex2\\data\\G1.json");
+        assertEquals(graph2.center().getKey(), 8);
+        graph2.load("C:\\Users\\eylon\\IdeaProjects\\OOP_Ex2\\data\\G2.json");
+        assertEquals(graph2.center().getKey(), 0);
+        graph2.load("C:\\Users\\eylon\\IdeaProjects\\OOP_Ex2\\data\\G3.json");
+        assertEquals(graph2.center().getKey(), 40);
 
 //        graph1.init(algo1.getGraph());
 //        assertEquals(graph1.center().getKey(), 34);
 //        graph1.init(algo2.getGraph());
-//        assertEquals(graph1.center().getKey(), 34);
 //        graph1.init(algo3.getGraph());
 //        assertEquals(graph1.center().getKey(), 34);
+
+
     }
 
     @Test
@@ -321,6 +336,15 @@ class MyDirectedWeightedGraphAlgorithmsTest {
 //        list.add(graph1.getGraph().getNode(8));
 //        assertEquals(graph1.tsp(list).size(), 34);
 
+//        graph1.load("C:\\Users\\eylon\\IdeaProjects\\OOP_Ex2\\nodes_10000");
+//        List <NodeData> list = new LinkedList<>();
+//        list.add(graph1.getGraph().getNode(1));
+//        list.add(graph1.getGraph().getNode(5));
+//        list.add(graph1.getGraph().getNode(7));
+//        list.add(graph1.getGraph().getNode(15));
+//        list.add(graph1.getGraph().getNode(8));
+//        assertEquals(graph1.tsp(list).size(), 34);
+
     }
 
     @Test
@@ -339,6 +363,7 @@ class MyDirectedWeightedGraphAlgorithmsTest {
 //        algo1.save("nodes_1000");
 //        algo2.save("nodes_10000");
 //        algo3.save("nodes_100000");
+//        algo4.save("nodes_1000000");
 
     }
 

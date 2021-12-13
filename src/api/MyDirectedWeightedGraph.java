@@ -73,20 +73,31 @@ public class MyDirectedWeightedGraph implements DirectedWeightedGraph{
     }
 
     @Override
-    public Iterator<NodeData> nodeIter() {
+    public Iterator<NodeData> nodeIter() throws RuntimeException{
+        int prev_MC = this.mc;
+        if(prev_MC != this.mc){
+            throw new RuntimeException("MC was changed!");
+        }
         return this.myNodes.values().iterator();
     }
 
     @Override
-    public Iterator<EdgeData> edgeIter() {
+    public Iterator<EdgeData> edgeIter() throws RuntimeException{
         List<EdgeData> tempList = new LinkedList<>();
         Iterator<EdgeData> tempedgeiter;
         Iterator<NodeData> tempnodeiter = this.nodeIter();
+        int prev_MC = this.mc;
         while (tempnodeiter.hasNext()==true)
         {
+            if(prev_MC != this.mc){
+                throw new RuntimeException("MC was changed!");
+            }
             tempedgeiter = this.edgeIter(tempnodeiter.next().getKey());
             while(tempedgeiter.hasNext()==true)
             {
+                if(prev_MC != this.mc){
+                    throw new RuntimeException("MC was changed!");
+                }
                 tempList.add(tempedgeiter.next());
             }
 
@@ -95,7 +106,11 @@ public class MyDirectedWeightedGraph implements DirectedWeightedGraph{
     }
 
     @Override
-    public Iterator<EdgeData> edgeIter(int node_id) {
+    public Iterator<EdgeData> edgeIter(int node_id) throws RuntimeException{
+        int prev_MC = this.mc;
+        if(prev_MC != this.mc){
+            throw new RuntimeException("MC was changed!");
+        }
         return this.myEdges.get(node_id).values().iterator();
     }
 
@@ -175,23 +190,6 @@ public class MyDirectedWeightedGraph implements DirectedWeightedGraph{
         }
     }
 
-//    public MyDirectedWeightedGraph getTranspose2(){
-//        MyDirectedWeightedGraph transpose = new MyDirectedWeightedGraph();
-//        Iterator<NodeData> nodeIter = this.nodeIter();
-//        NodeData temp = nodeIter.next();
-//        int first = temp.getKey();
-//        Iterator<EdgeData> edgeIter = this.edgeIter(first);
-//        while(nodeIter.hasNext()){
-//            while(edgeIter.hasNext()){
-//                EdgeData next = edgeIter.next();
-//                int tempSrc = nodeIter.next().getKey();
-//                int tempDest = next.getDest();
-//                newEdges.get(tempDest).put(tempSrc,next);
-//            }
-//        }
-//        MyDirectedWeightedGraph newGraph = new MyDirectedWeightedGraph(this.myNodes, newEdges);
-//        return newGraph;
-//    }
 
     public MyDirectedWeightedGraph getTranspose(){
         MyDirectedWeightedGraph transpose = new MyDirectedWeightedGraph();
