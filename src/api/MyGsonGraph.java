@@ -3,6 +3,7 @@ import com.google.gson.*;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.LinkedList;
 import java.util.List;
@@ -47,10 +48,11 @@ public class MyGsonGraph {
             MyGsonGraph mygraph = gson.fromJson(myread,MyGsonGraph.class);
             this.Edges=mygraph.getEdges();
             this.Nodes=mygraph.getNodes();
+            myread.close();
             return true;
 
         }
-        catch(FileNotFoundException e){
+        catch(IOException e){
             e.printStackTrace();
             return false;
         }
@@ -66,7 +68,7 @@ public class MyGsonGraph {
             mywrite.close();
             return true;
         }
-        catch(FileNotFoundException e){
+        catch(IOException e){
             e.printStackTrace();
             return false;
         }
