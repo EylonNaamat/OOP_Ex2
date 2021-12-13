@@ -118,13 +118,13 @@ public class MyDirectedWeightedGraphAlgorithms implements DirectedWeightedGraphA
         while ((city != null) && (cities.size() != 1)) {
             cities.remove(city);
             tempGrath = this.dijkstraAlgo(city.getKey());
-            double mindist = 0.0;
+            double mindist = Double.MAX_VALUE;
             for (NodeData nod : cities) {
                 NodeData tempnode = tempGrath.getMyNodes().get(nod.getKey());
                 if (tempnode.getTag() == -1) {
                     return null;
                 }
-                if ((mindist == 0.0) || (tempnode.getWeight() < mindist)) {
+                if (tempnode.getWeight() < mindist) {
                     mindist = tempnode.getWeight();
                     destcity = nod;
                 }
@@ -132,7 +132,7 @@ public class MyDirectedWeightedGraphAlgorithms implements DirectedWeightedGraphA
             ans.addAll(shortestPath(city.getKey(), destcity.getKey()));
             ans.remove(ans.size() - 1);
             city = destcity;
-            mindist = 0.0;
+            mindist = Double.MAX_VALUE;
 
         }
         ans.add(city);
