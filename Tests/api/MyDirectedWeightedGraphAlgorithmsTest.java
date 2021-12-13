@@ -252,11 +252,11 @@ class MyDirectedWeightedGraphAlgorithmsTest {
         graph1.init(g2);
         assertEquals(graph1.center().getKey(), 4);
         MyDirectedWeightedGraphAlgorithms graph2 = new MyDirectedWeightedGraphAlgorithms();
-        graph2.load("C:\\Users\\eylon\\IdeaProjects\\OOP_Ex2\\data\\G1.json");
+        graph2.load("G1.json");
         assertEquals(graph2.center().getKey(), 8);
-        graph2.load("C:\\Users\\eylon\\IdeaProjects\\OOP_Ex2\\data\\G2.json");
+        graph2.load("G2.json");
         assertEquals(graph2.center().getKey(), 0);
-        graph2.load("C:\\Users\\eylon\\IdeaProjects\\OOP_Ex2\\data\\G3.json");
+        graph2.load("G3.json");
         assertEquals(graph2.center().getKey(), 40);
 
 //        graph1.init(algo1.getGraph());
@@ -354,7 +354,7 @@ class MyDirectedWeightedGraphAlgorithmsTest {
         graph1.init(g2);
         graph1.save("Eylon.json");
         MyDirectedWeightedGraphAlgorithms graph2 = new MyDirectedWeightedGraphAlgorithms();
-        graph2.load("C:\\Users\\eylon\\IdeaProjects\\OOP_Ex2\\Eylon.json");
+        graph2.load("Eylon.json");
         assertEquals(graph1.isConnected(), graph2.isConnected());
         assertEquals(graph1.shortestPathDist(1,7), graph2.shortestPathDist(1,7));
         assertEquals(graph1.getGraph().nodeSize(), graph2.getGraph().nodeSize());
@@ -379,13 +379,13 @@ class MyDirectedWeightedGraphAlgorithmsTest {
         assertEquals(graph1.shortestPathDist(1,3), graph2.shortestPathDist(1,3));
         assertEquals(graph1.getGraph().nodeSize(), graph2.getGraph().nodeSize());
         assertEquals(graph1.getGraph().edgeSize(), graph2.getGraph().edgeSize());
-        graph2.load("C:\\Users\\eylon\\IdeaProjects\\OOP_Ex2\\data\\G1.json");
+        graph2.load("G1.json");
         assertEquals(graph2.center().getKey(), 8);
         assertEquals(graph2.isConnected(), true);
-        graph2.load("C:\\Users\\eylon\\IdeaProjects\\OOP_Ex2\\data\\G2.json");
+        graph2.load("G2.json");
         assertEquals(graph2.center().getKey(), 0);
         assertEquals(graph2.isConnected(), true);
-        graph2.load("C:\\Users\\eylon\\IdeaProjects\\OOP_Ex2\\data\\G3.json");
+        graph2.load("G3.json");
         assertEquals(graph2.center().getKey(), 40);
         assertEquals(graph2.isConnected(), true);
 

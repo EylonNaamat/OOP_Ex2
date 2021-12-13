@@ -10,12 +10,15 @@ The classes we chose to create are: </br>
 7. MyGsonGraph
 8. MyGsonNode
 </br>
+
 ### MyNodeData
 MyNodeData is a class that has the id, location, weight, info and tag of a node. we created 2 constructors: a constructor that gets an id and location of a node, and a constructor that gets a NodeData and creates new NodeData. this class implements NodeData interface and its functions. 
 </br>
+
 ### MyEdgeData
 MyEdgeData is a class that has a source, weight, dest, info and tag of an Edge. we created 2 constructors: a constructor that gets src, dest, weight, and a constructor that gets an EdgeData and creates a new EdgeData. this class implements EdgeData interface and its functions.
 </br>
+
 ### MyDirectedWeightedGraph
 MyDirectedWeightedGraph is a class that has a hashmap that holds all the edges in the graph (the key is the src of the edge, and the value is another hashmap that its key is the dest of the edge, and its value is EdgeData), another hashmap that holds all the nodes of the graph (the key is the node's id, and the value is NodeData), a field that says how many edges are in the graph, a field that says how many nodes are in the graph, and a fields that says how many changes were made in the graph.
 </br>
@@ -91,7 +94,14 @@ this class has center function, this function checks if the graph is connected, 
 this class has a tsp function, this function gets a list and return another list. we use the greedy algorithm of the traveling salesman problem. we start from the first node in the list given and by using dijkstraAlgo we get a graph that helps us find the node that has the shortest path from this node. we get the path from this node to its closet by using the shortestPath function, and we add it to the answer list, and we remove from the given list the nodes we visited. then we do the same with node that was the closet one to the previous node, until we will visit all the nodes in the given list.
 </br>
 </br>
-for doing save and load from json we created objects that are similar to the objects the json describes. 
+for doing save and load from json we created objects that are similar to the objects the json describes. we have created the following classes: MyGsonGraph, MyGsonNode, MyGsonEdje. MyGsonGraph has two fields: a list of GsonEdje and a list of GsonNode, and 2 constructors. the first one is a regular constructor that creates new lists of nodes and edges. the second constructor get MyDirectedWeightedGraph and creates a new MyGsonGraph from it, by casting every node and edge to MyGsonNode and MyGsonEdje. the class has a load function that gets a json file and creates MyGsonGraph from it. it also has a save function that gets a json file and writes the graph to it.
+</br>
+MyGsonNode has 2 fields, string pos and int id. it has a constructor that gets NodeData and converts the GeoLocation to string, and sets the key as the id. it also has a getLocation and setLocation functions. this class implements NodeData, so we can convert MyGsonNode to MyNodeData 
+</br>
+MyGsonEdje has 3 fields - src weight and dest. it has a constructor that get EdgeData and creates MyGsonEdje. this class implements EdgeData, so we can convert MyGsonEdje to MyEdgeData.</br>
+back to MyDirectedWeightedGraph, save function. this function gets a json file name, creates MyGsonGraph and uses its save function. we are using MyGsonGraph in order to match the json files we have.
+</br>
+back to MyDirectedWeightedGraph, load function. the function gets a json file. creates a MyGsonGraph and tries to use its load function. if the load function succeed, we create a MyDirectedWeightedGraph and go through every node and edge in MyGsonGraph and copy it to the new MyDirectedWeightedGraph. 
 </br>
 </br>
 ### Algorithms Performance Analysis
@@ -131,3 +141,7 @@ save with 100,000 nodes - 4 sec 262 ms. </br>
 load with 1,000 nodes - 265 ms, </br>
 load with 10,000 nodes - 582 ms. </br>
 load with 100,000 nodes - 3 sec 191 ms. </br>
+
+### GUI Interface
+we have created a GUI interface. the main class is Gui_Menu. this class implements ActionListener. GUI_Menu has two options: create a new empty graph, and load a graph from an exiting file. after we chose an option and it was successful we will go to Gui_algo that has all the algorithms of DirectedWeightedGraphAlgorithms and an option to make changes in the graph. if we press on isConnected it will tell us if the graph is connected. if we press on shortestPathDist it will ask us to insert a src and dest and then it will compute the shortestPathDist and will also display it on the screen. if we press on shortestPath it will ask us to insert the src and dest and then it will compute the shortestPath and display it on the screen. if we press on center it will compute the center of the graph and will display it on the screen. if we press on tsp it will ask us to insert the key of the cities one by one and then it will compute and display the path on the screen. if we press on save it will ask us to insert the name of json file we want to save this graph by. if we press on load new graph, it will ask us to insert the json file name we want to load. if we press on change graph it will go to Gui_Gfunc. in that class if we press on getNode it will display all the info of the node on the screen. if we press on getEdge it will display all the info of the edge on the screen. if we press on addNode it will ask us to insert the id and location of the node, and will add it to the graph. if we press on connect it will aks us to insert the src weight and dest of the new edge, and will add it to the graph. if we press on removeNode it will ask us to insert the key of the node we want to remove, and then it will display that node on the screen. if we press on removeEdge it will ask us to insert the src and dest of the edge and then it will display the edge info on the screen. if we press on nodeSize it will display the node size on the screen. if we press on edgeSize it will display the number of edges on the screen. if we press on edgeIter it will go through all the edges in the graph and will display the info of the edge on the screen. if we press in nodeIter it will go through all the nodes in the graph and will display their info on the screen. if we press on getMC it will display the MC on the screen. if we press on go to Algo Func it will go to Gui_algo. if we press on Drow graph it go to Gui_MyGraphDrow that implements JFrame, and Gui_MyGraphDrow uses Gui_GraphPamelhelper that implements JPanel. it will display the graph on the screen.
+
