@@ -72,7 +72,7 @@ public class Gui_algo implements ActionListener {
 
         this.chang.setBounds(260, 260, 220, 50);
         this.chang.addActionListener(this);
-        this.chang.setBackground(Color.ORANGE);
+        this.chang.setBackground(Color.red);
         this.algoframe.add(this.chang);
 
         this.drowgraph.setBounds(40, 330, 400, 70);
@@ -93,22 +93,20 @@ public class Gui_algo implements ActionListener {
         {
             String st = Boolean.toString(this.thealgo.isConnected());
             this.algoframe.dispose();
-            Gui_TextShow tempText =new Gui_TextShow(this.thealgo,st);
+            new Gui_TextShow(this.thealgo,st);
         }
         if(event.getSource() == this.shortestPath)
         {
             String[] arr = {"src","dest"};
             this.algoframe.dispose();
-            MyDirectedWeightedGraph dg = (MyDirectedWeightedGraph)this.thealgo.getGraph();
-            Gui_needInPut tempGUIdist = new Gui_needInPut(dg,"shortestPath",arr);
+            new Gui_needInPut(this.thealgo,"shortestPath",arr);
 
         }
         if(event.getSource() == this.shortestPathDist)
         {
             String[] arr = {"src","dest"};
             this.algoframe.dispose();
-            MyDirectedWeightedGraph dg = (MyDirectedWeightedGraph)this.thealgo.getGraph();
-            Gui_needInPut tempGUIdist = new Gui_needInPut(dg,"shortestPathDist",arr);
+            new Gui_needInPut(this.thealgo,"shortestPathDist",arr);
         }
         if(event.getSource() == this.center)
         {
@@ -126,18 +124,17 @@ public class Gui_algo implements ActionListener {
         if(event.getSource() == this.save)
         {
             this.algoframe.dispose();
-            Gui_LoadASave tempGUIsave = new Gui_LoadASave(this.thealgo,"save");
+            new Gui_LoadASave(this.thealgo,"save");
         }
         if(event.getSource() == this.chang)
         {
             this.algoframe.dispose();
-            MyDirectedWeightedGraph mg = (MyDirectedWeightedGraph) this.thealgo.getGraph();
-            Gui_Gfunc tempGUIgfunc = new Gui_Gfunc(mg);
+            new Gui_Gfunc(this.thealgo);
         }
         if(event.getSource() == this.loadNew)
         {
             this.algoframe.dispose();
-            Gui_LoadASave tempGUInewload = new Gui_LoadASave(this.thealgo , "load");
+            new Gui_LoadASave(this.thealgo , "load");
         }
         if(event.getSource() == this.drowgraph)
         {

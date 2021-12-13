@@ -51,7 +51,7 @@ public class Gui_LoadASavesuccessful implements ActionListener {
     public void actionPerformed(ActionEvent event) {
         if (event.getSource() == this.moveon) {
             this.successfulframe.dispose();
-            Gui_algo tempGUIalgo = new Gui_algo(this.thealgo);
+            new Gui_algo(this.thealgo);
         }
     }
 }

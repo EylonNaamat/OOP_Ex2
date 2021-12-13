@@ -2,6 +2,7 @@ package guiapi;
 
 import api.EdgeData;
 import api.MyDirectedWeightedGraph;
+import api.MyDirectedWeightedGraphAlgorithms;
 import api.NodeData;
 import org.w3c.dom.Node;
 
@@ -14,13 +15,15 @@ public class Gui_GraphPamelhelper extends JPanel {
     private int high=700;
     private int width=600;
     private MyDirectedWeightedGraph myGraph;
+    private MyDirectedWeightedGraphAlgorithms myalgo;
     private List<NodeData> myList;
     public JButton edit= new JButton("edit");
 
 
-    public Gui_GraphPamelhelper(MyDirectedWeightedGraph gr , List<NodeData> myList)
+    public Gui_GraphPamelhelper(MyDirectedWeightedGraphAlgorithms gr , List<NodeData> myList)
     {
-        this.myGraph=gr;
+        this.myalgo=gr;
+        this.myGraph = (MyDirectedWeightedGraph) myalgo.getGraph();
         this.setPreferredSize(new Dimension(width,high));
         this.myList=myList;
     }

@@ -68,13 +68,13 @@ public class Gui_LoadASave implements ActionListener {
             if(flage== true)
             {
                 this.lsframe.dispose();
-                Gui_LoadASavesuccessful tempGUIsuccessful = new Gui_LoadASavesuccessful(this.thealgo,this.st);
+                new Gui_LoadASavesuccessful(this.thealgo,this.st);
 
             }
             else
             {
                 this.lsframe.dispose();
-                Gui_LoadASaveFail tempGUIFail= new Gui_LoadASaveFail(this.thealgo,this.st);
+                new Gui_LoadASaveFail(this.thealgo,this.st);
             }
         }
         if(event.getSource()==this.clean)

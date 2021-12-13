@@ -15,7 +15,7 @@ public class Gui_needInPut implements ActionListener {
     private int high = 500;
     private String active;
     private String[] needname;
-    private MyDirectedWeightedGraph mygraph;
+    private MyDirectedWeightedGraphAlgorithms myalgo;
     private JFrame actionframe = new JFrame();
     private JLabel action = new JLabel();
     private JButton startdoing = new JButton();
@@ -24,10 +24,10 @@ public class Gui_needInPut implements ActionListener {
 
 
 
-    public Gui_needInPut(MyDirectedWeightedGraph gr, String st , String[] arr)
+    public Gui_needInPut(MyDirectedWeightedGraphAlgorithms gr, String st , String[] arr)
     {
         this.active=st;
-        this.mygraph = gr;
+        this.myalgo = gr;
         this.needname = arr;
         this.name = new JTextArea[arr.length];
         this.input = new JTextField[arr.length];
@@ -73,16 +73,14 @@ public class Gui_needInPut implements ActionListener {
             {
                 this.actionframe.dispose();
                 int input = Integer.parseInt(this.input[0].getText());
-                NodeData n = this.mygraph.getNode(input);
+                NodeData n = this.myalgo.getGraph().getNode(input);
                 if(this.active == "removeNode")
                 {
-                    n=this.mygraph.removeNode(input);
+                    n=this.myalgo.getGraph().removeNode(input);
                 }
                 if(n==null)
                 {
-                    MyDirectedWeightedGraphAlgorithms tempalgo =new MyDirectedWeightedGraphAlgorithms();
-                    tempalgo.init(this.mygraph);
-                    Gui_TextShow tempGUIgetnode = new Gui_TextShow(tempalgo,"fail "+this.active+" node\n no node key "+input);
+                    new Gui_TextShow(this.myalgo,"fail "+this.active+" node\n no node key "+input);
                 }
                 else {
                     String st = "the node :";
@@ -93,9 +91,7 @@ public class Gui_needInPut implements ActionListener {
                     st = st + "\n Weight=" + n.getWeight();
                     st = st + "\n Info=" + n.getInfo();
                     st = st + "\n Tag=" + n.getTag();
-                    MyDirectedWeightedGraphAlgorithms tempalgo = new MyDirectedWeightedGraphAlgorithms();
-                    tempalgo.init(this.mygraph);
-                    Gui_TextShow tempGUIgetnode = new Gui_TextShow(tempalgo, st);
+                    new Gui_TextShow(this.myalgo, st);
                 }
             }
             if(this.active == "getEdge"||this.active == "removeEdge")
@@ -103,15 +99,13 @@ public class Gui_needInPut implements ActionListener {
                 this.actionframe.dispose();
                 int inputsrc = Integer.parseInt(this.input[0].getText());
                 int inputdest = Integer.parseInt(this.input[1].getText());
-                EdgeData tempEdje = this.mygraph.getEdge(inputsrc, inputdest);
+                EdgeData tempEdje = this.myalgo.getGraph().getEdge(inputsrc, inputdest);
                 if(this.active == "removeEdge") {
-                   tempEdje = this.mygraph.removeEdge(inputsrc, inputdest);
+                   tempEdje = this.myalgo.getGraph().removeEdge(inputsrc, inputdest);
                 }
                 if(tempEdje==null)
                 {
-                    MyDirectedWeightedGraphAlgorithms tempalgo =new MyDirectedWeightedGraphAlgorithms();
-                    tempalgo.init(this.mygraph);
-                    Gui_TextShow tempGUIgetnode = new Gui_TextShow(tempalgo,"fail "+this.active+" Edge\n no edge");
+                    new Gui_TextShow(this.myalgo,"fail "+this.active+" Edge\n no edge");
                 }
                 else {
                     String st = "the Edje :";
@@ -120,9 +114,7 @@ public class Gui_needInPut implements ActionListener {
                     st = st + "\n Weight=" + tempEdje.getWeight();
                     st = st + "\n Info=" + tempEdje.getInfo();
                     st = st + "\n Tag=" + tempEdje.getTag();
-                    MyDirectedWeightedGraphAlgorithms tempalgo = new MyDirectedWeightedGraphAlgorithms();
-                    tempalgo.init(this.mygraph);
-                    Gui_TextShow tempGUIgetnode = new Gui_TextShow(tempalgo, st);
+                    new Gui_TextShow(this.myalgo, st);
                 }
             }
             if(this.active == "addNode")
@@ -134,10 +126,8 @@ public class Gui_needInPut implements ActionListener {
                 double inputz = Double.parseDouble(this.input[3].getText());
                 MyGeoLocation temploc = new MyGeoLocation(inputx,inputy,inputz);
                 NodeData n = new MyNodeData(inputkey,temploc);
-                this.mygraph.addNode(n);
-                MyDirectedWeightedGraphAlgorithms tempalgo =new MyDirectedWeightedGraphAlgorithms();
-                tempalgo.init(this.mygraph);
-                Gui_TextShow tempGUIgetnode = new Gui_TextShow(tempalgo,"add successful");
+                this.myalgo.getGraph().addNode(n);
+                Gui_TextShow tempGUIgetnode = new Gui_TextShow(this.myalgo,"add successful");
 
 
             }
@@ -147,32 +137,26 @@ public class Gui_needInPut implements ActionListener {
                 int inputsrc = Integer.parseInt(this.input[0].getText());
                 double inputw = Double.parseDouble(this.input[1].getText());
                 int inputdest = Integer.parseInt(this.input[2].getText());
-                this.mygraph.connect(inputsrc,inputdest,inputw);
-                MyDirectedWeightedGraphAlgorithms tempalgo =new MyDirectedWeightedGraphAlgorithms();
-                tempalgo.init(this.mygraph);
-                Gui_TextShow tempGUIgetnode = new Gui_TextShow(tempalgo,"add successful");
+                this.myalgo.getGraph().connect(inputsrc,inputdest,inputw);
+                Gui_TextShow tempGUIgetnode = new Gui_TextShow(this.myalgo,"add successful");
 
             }
             if(this.active == "shortestPathDist")
             {
-                MyDirectedWeightedGraphAlgorithms tempalgo =new MyDirectedWeightedGraphAlgorithms();
-                tempalgo.init(this.mygraph);
                 int inputsrc = Integer.parseInt(this.input[0].getText());
                 int inputdest = Integer.parseInt(this.input[1].getText());
                 String st ="the shortest dist from "+inputsrc+" to "+inputdest+": \n";
-                st = st + (tempalgo.shortestPathDist(inputsrc,inputdest));
+                st = st + (this.myalgo.shortestPathDist(inputsrc,inputdest));
                 this.actionframe.dispose();
-                Gui_TextShow tempText =new Gui_TextShow(tempalgo,st);
+                Gui_TextShow tempText =new Gui_TextShow(this.myalgo,st);
             }
             if(this.active == "shortestPath")
             {
-                MyDirectedWeightedGraphAlgorithms tempalgo =new MyDirectedWeightedGraphAlgorithms();
-                tempalgo.init(this.mygraph);
                 int inputsrc = Integer.parseInt(this.input[0].getText());
                 int inputdest = Integer.parseInt(this.input[1].getText());
-                List<NodeData> ndlist = tempalgo.shortestPath(inputsrc,inputdest);
+                List<NodeData> ndlist = this.myalgo.shortestPath(inputsrc,inputdest);
                 this.actionframe.dispose();
-                new Gui_MyGraphDrow(tempalgo,ndlist);
+                new Gui_MyGraphDrow(this.myalgo,ndlist);
             }
         }
     }

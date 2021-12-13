@@ -54,12 +54,12 @@ public class Gui_TextShow implements ActionListener {
         if(event.getSource() == this.goalgo)
         {
             this.algoTestframe.dispose();
-            Gui_algo tempGuiAlgo = new Gui_algo(this.thealgo);
+            new Gui_algo(this.thealgo);
         }
         if(event.getSource() == this.gograph)
         {
             this.algoTestframe.dispose();
-            Gui_Gfunc tempGuiAlgo = new Gui_Gfunc((MyDirectedWeightedGraph) this.thealgo.getGraph());
+            new Gui_Gfunc(this.thealgo);
         }
     }
 }

@@ -48,12 +48,12 @@ public class Gui_LoadASaveFail implements ActionListener {
         if (event.getSource() == this.goback) {
             if(this.st=="load") {
                 this.failframe.dispose();
-                Gui_Menu tempGuimenu = new Gui_Menu();
+                new Gui_Menu();
             }
             if(this.st == "save")
             {
                 this.failframe.dispose();
-                Gui_algo tempGUIalgo = new Gui_algo(this.thealgo);
+                new Gui_algo(this.thealgo);
             }
         }
     }

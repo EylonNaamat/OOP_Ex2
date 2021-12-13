@@ -19,7 +19,7 @@ public class Gui_MyGraphDrow extends JFrame implements ActionListener{
     {
         this.algo = algo;
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.workPanel = new Gui_GraphPamelhelper((MyDirectedWeightedGraph)algo.getGraph(),mylist);
+        this.workPanel = new Gui_GraphPamelhelper(algo,mylist);
         this.add(this.workPanel);
         this.pack();
         this.setVisible(true);

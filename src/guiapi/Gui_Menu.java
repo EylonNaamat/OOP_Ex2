@@ -1,6 +1,7 @@
 package guiapi;
 
 
+import api.DirectedWeightedGraphAlgorithms;
 import api.MyDirectedWeightedGraph;
 import api.MyDirectedWeightedGraphAlgorithms;
 import javax.swing.*;
@@ -40,20 +41,12 @@ public class Gui_Menu implements ActionListener {
         this.menuframe.setVisible(true);
         this.menuframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
-    public Gui_Menu(String st)
+    public Gui_Menu(DirectedWeightedGraphAlgorithms alg)
     {
-        this.Myalgo = new MyDirectedWeightedGraphAlgorithms();
-        boolean flage= this.Myalgo.load(st);
-        if(flage== true)
-        {
-            this.menuframe.dispose();
-            Gui_LoadASavesuccessful tempGUIsuccessful = new Gui_LoadASavesuccessful(this.Myalgo,"load");
-        }
-        else
-        {
-            this.menuframe.dispose();
-            Gui_LoadASaveFail tempGUIFail= new Gui_LoadASaveFail(this.Myalgo,"load");
-        }
+        this.Myalgo = (MyDirectedWeightedGraphAlgorithms) alg;
+        this.menuframe.dispose();
+        new Gui_LoadASavesuccessful(this.Myalgo,"load");
+
     }
     public JFrame getframe()
     {
@@ -64,7 +57,7 @@ public class Gui_Menu implements ActionListener {
         if(event.getSource()==this.newGraph)
         {
             this.menuframe.dispose();
-            Gui_Gfunc nextGUIfunc = new Gui_Gfunc(new MyDirectedWeightedGraph());
+            new Gui_Gfunc(new MyDirectedWeightedGraphAlgorithms());
         }
         if(event.getSource()==this.loadgraph)
         {

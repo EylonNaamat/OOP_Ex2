@@ -2,6 +2,7 @@ package guiapi;
 
 import api.EdgeData;
 import api.MyDirectedWeightedGraph;
+import api.MyDirectedWeightedGraphAlgorithms;
 import api.NodeData;
 
 import javax.swing.*;
@@ -14,17 +15,17 @@ public class Gui_iterEdge implements ActionListener {
     private int width = 500;
     private int high = 500;
     private Iterator<EdgeData> iter;
-    private MyDirectedWeightedGraph mygraph;
+    private MyDirectedWeightedGraphAlgorithms myalgo;
     private JFrame iterframe = new JFrame(" Iterator");
     private JLabel head = new JLabel(" Iterator:");
     private JTextArea text = new JTextArea();
     private JButton next = new JButton("Next");
     private JButton stopIter = new JButton("Stop");
 
-    public Gui_iterEdge (MyDirectedWeightedGraph gr, Iterator<EdgeData> niter)
+    public Gui_iterEdge (MyDirectedWeightedGraphAlgorithms gr, Iterator<EdgeData> niter)
     {
         this.iter=niter;
-        this.mygraph=gr;
+        this.myalgo=gr;
 
         this.head.setBounds(180,10,220,40);
         this.head.setFont(new Font(null,Font.BOLD,30));
@@ -67,7 +68,7 @@ public class Gui_iterEdge implements ActionListener {
         if(event.getSource() == this.stopIter)
         {
             this.iterframe.dispose();
-            Gui_Gfunc tempGUIfunc = new Gui_Gfunc(this.mygraph);
+            new Gui_Gfunc(this.myalgo);
         }
 
         if(event.getSource() == this.next)
@@ -75,11 +76,11 @@ public class Gui_iterEdge implements ActionListener {
             this.iterframe.dispose();
             if(this.iter.hasNext()==false)
             {
-                Gui_Gfunc tempGUIfunc = new Gui_Gfunc(this.mygraph);
+                new Gui_Gfunc(this.myalgo);
             }
             else
             {
-                Gui_iterEdge tempGUIiter = new Gui_iterEdge(this.mygraph,this.iter);
+                new Gui_iterEdge(this.myalgo,this.iter);
             }
         }
     }
