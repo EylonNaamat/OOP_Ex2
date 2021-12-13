@@ -1,0 +1,203 @@
+@startuml
+interface GeoLocation {
+    +public double x();
+    +public double y();
+    +public double z();
+    +public double distance(GeoLocation g);
+}
+interface EdgeData {
+	+public int getSrc();
+	+public int getDest();
+	+public double getWeight();
+	+public String getInfo();
+	+public void setInfo(String s);
+	+public int getTag();
+	+public void setTag(int t);
+}
+interface NodeData {
+	+public int getKey();
+	+public GeoLocation getLocation();
+	+public void setLocation(GeoLocation p);
+	+public double getWeight();
+	+public void setWeight(double w);
+	+public String getInfo();
+	+public void setInfo(String s);
+	+public int getTag();
+	+public void setTag(int t);
+}
+interface DirectedWeightedGraph {
+	+public NodeData getNode(int key);
+	+public EdgeData getEdge(int src, int dest);
+	+public void addNode(NodeData n);
+	+public void connect(int src, int dest, double w);
+	+public Iterator<NodeData> nodeIter();
+	+public Iterator<EdgeData> edgeIter();
+	+public Iterator<EdgeData> edgeIter(int node_id);
+	+public NodeData removeNode(int key);
+	+public EdgeData removeEdge(int src, int dest);
+	+public int nodeSize();
+	+public int edgeSize();
+	+public int getMC();
+}
+interface DirectedWeightedGraphAlgorithms {
+    +public void init(DirectedWeightedGraph g);
+    +public DirectedWeightedGraph getGraph();
+    +public DirectedWeightedGraph copy();
+    +public boolean isConnected();
+    +public double shortestPathDist(int src, int dest);
+    +public List<NodeData> shortestPath(int src, int dest);
+    +public NodeData center();
+    +Public List<NodeData> tsp(List<NodeData> cities);
+    +public boolean save(String file);
+    +public boolean load(String file);
+}
+class MyGeoLocation implements GeoLocation{
+    private double x;
+    private double y;
+    private double z;
+
+    public MyGeoLocation(double nx, double ny, double nz)
+    public MyGeoLocation(String st)
+    public MyGeoLocation(GeoLocation g)
+    public double x()
+    public double y()
+    public double z()
+    public double distance(GeoLocation g)
+    public String posString()
+}
+
+class MyEdgeData implements EdgeData{
+
+    private int src;
+    private double w;
+    private int dest;
+    private String info;
+    private int tag;
+
+    public MyEdgeData(int nsrc , double nwidth, int ndest)
+    public MyEdgeData(EdgeData edge)
+    public int getSrc()
+    public int getDest()
+    public double getWeight()
+    public String getInfo()
+    public void setInfo(String s)
+    public int getTag()
+    public void setTag(int t)
+}
+class MyNodeData implements NodeData {
+
+    private int id;
+    private MyGeoLocation location;
+    private double weight;
+    private String info;
+    private int tag;
+
+    public MyNodeData(int id, MyGeoLocation location)
+    public MyNodeData(NodeData n)
+    public int getKey()
+    public GeoLocation getLocation()
+    public void setLocation(GeoLocation p)
+    public double getWeight()
+    public void setWeight(double w)
+    public String getInfo()
+    public void setInfo(String s)
+    public int getTag()
+    public void setTag(int t)
+}
+class MyGsonEdje implements EdgeData{
+    private int src;
+    private double w;
+    private int dest;
+
+    public MyGsonEdje(EdgeData e)
+    public int getSrc()
+    public int getDest()
+    public double getWeight()
+    public String getInfo()
+    public void setInfo(String s)
+    public int getTag()
+    public void setTag(int t)
+}
+class MyGsonNode implements NodeData{
+    private String pos;
+    private int id;
+
+    public MyGsonNode(NodeData n)
+    public int getKey()
+    public GeoLocation getLocation()
+    public void setLocation(GeoLocation p)
+    public double getWeight()
+    public void setWeight(double w)
+    public String getInfo()
+    public void setInfo(String s)
+    public int getTag()
+    public void setTag(int t)
+}
+class MyGsonGraph {
+    private List<MyGsonEdje> Edges;
+    private List<MyGsonNode> Nodes;
+
+    public MyGsonGraph ()
+    public MyGsonGraph (MyDirectedWeightedGraph myGraph)
+    public List<MyGsonNode> getNodes()
+    public List<MyGsonEdje> getEdges()
+    public boolean load(String fileName)
+    public boolean save(String fileName)
+}
+class MyDirectedWeightedGraph implements DirectedWeightedGraph{
+
+    private HashMap<Integer, HashMap<Integer, EdgeData>> myEdges;
+    private HashMap<Integer, NodeData> myNodes;
+    private int edgesSize;
+    private int nodesSize;
+    private int mc;
+
+    public MyDirectedWeightedGraph()
+    public MyDirectedWeightedGraph(HashMap<Integer, NodeData> myNodes, HashMap<Integer, HashMap<Integer,EdgeData>> myEdges)
+    public HashMap<Integer, HashMap<Integer, EdgeData>> getMyEdges()
+    public HashMap<Integer, NodeData> getMyNodes()
+    public NodeData getNode(int key)
+    public EdgeData getEdge(int src, int dest)
+    public void addNode(NodeData n)
+    public void connect(int src, int dest, double w)
+    public Iterator<NodeData> nodeIter()
+    public Iterator<EdgeData> edgeIter()
+    public Iterator<EdgeData> edgeIter(int node_id)
+    public NodeData removeNode(int key)
+    public EdgeData removeEdge(int src, int dest)
+    public int nodeSize()
+    public int edgeSize()
+    public int getMC()
+    public void dfs(NodeData node)
+    public void setTags()
+    public MyDirectedWeightedGraph getTranspose()
+}
+
+class MyDirectedWeightedGraphAlgorithms implements DirectedWeightedGraphAlgorithms {
+
+
+    private MyDirectedWeightedGraph myGraph;
+
+    public MyDirectedWeightedGraphAlgorithms()
+    public void init(DirectedWeightedGraph g)
+    public DirectedWeightedGraph getGraph()
+    public DirectedWeightedGraph copy()
+    public boolean isConnected()
+    public double shortestPathDist(int src, int dest)
+    public List<NodeData> shortestPath(int src, int dest)
+    public NodeData center()
+    public List<NodeData> tsp(List<NodeData> cities)
+    public boolean save(String file)
+    public boolean load(String file)
+    public MyDirectedWeightedGraph dijkstraAlgo(int src)
+    public double maxDist(int src)
+}
+
+MyDirectedWeightedGraphAlgorithms -> DirectedWeightedGraph
+MyDirectedWeightedGraphAlgorithms -> MyGsonGraph
+MyGsonGraph -> NodeData
+MyGsonGraph -> EdgeData
+MyDirectedWeightedGraph -> EdgeData
+MyDirectedWeightedGraph -> NodeData
+MyNodeData -> GeoLocation
+@enduml
