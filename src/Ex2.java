@@ -1,6 +1,7 @@
 import api.DirectedWeightedGraph;
 import api.DirectedWeightedGraphAlgorithms;
 import api.MyDirectedWeightedGraphAlgorithms;
+import guiapi.Gui_LoadASaveFail;
 import guiapi.Gui_Menu;
 import guiapi.Gui_MyGraphDrow;
 
@@ -38,7 +39,11 @@ public class Ex2 {
      */
     public static void runGUI(String json_file) {
         DirectedWeightedGraphAlgorithms alg = getGrapgAlgo(json_file);
-        new Gui_Menu(alg);
+        if(alg.load(json_file) == false){
+            new Gui_LoadASaveFail((MyDirectedWeightedGraphAlgorithms)(alg), "load");
+        }else{
+            new Gui_Menu(alg);
+        }
     }
 
     public static void main(String[] args) {
