@@ -15,8 +15,8 @@ public class Gui_algo implements ActionListener {
     private int width = 500;
     private int high = 500;
     private MyDirectedWeightedGraphAlgorithms thealgo;
-    private JFrame algoframe = new JFrame("function");
-    private JLabel head = new JLabel("functions:");
+    private JFrame algoframe = new JFrame(" algo function");
+    private JLabel head = new JLabel(" algo functions:");
     private JButton isConnected = new JButton("isConnected");
     private JButton shortestPathDist = new JButton("shortestPathDist");
     private JButton shortestPath = new JButton("shortestPath");
@@ -30,7 +30,7 @@ public class Gui_algo implements ActionListener {
     public Gui_algo(MyDirectedWeightedGraphAlgorithms algo) {
         this.thealgo = algo;
 
-        this.head.setBounds(180, 10, 220, 40);
+        this.head.setBounds(150, 10, 220, 40);
         this.head.setFont(new Font(null, Font.BOLD, 25));
         this.algoframe.add(this.head);
 
@@ -118,7 +118,9 @@ public class Gui_algo implements ActionListener {
         }
         if(event.getSource() == this.tsp)
         {
-
+            this.algoframe.dispose();
+            List<NodeData> nls= new LinkedList<>();
+            new Gui_addNodeToList(this.thealgo,nls);
         }
         if(event.getSource() == this.save)
         {

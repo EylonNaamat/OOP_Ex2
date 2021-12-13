@@ -38,7 +38,7 @@ public class Ex2 {
     public static void runGUI(String json_file) {
         DirectedWeightedGraphAlgorithms alg = getGrapgAlgo(json_file);
         MyDirectedWeightedGraphAlgorithms algo = (MyDirectedWeightedGraphAlgorithms)(alg);
-        new Gui_MyGraphDrow(algo);
+        //new Gui_MyGraphDrow(algo);
     }
 
     public static void main(String[] args) {

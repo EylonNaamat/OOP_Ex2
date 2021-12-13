@@ -15,8 +15,8 @@ public class Gui_Gfunc implements ActionListener {
     private int width = 500;
     private int high = 500;
     private MyDirectedWeightedGraph theGraph;
-    private JFrame gfuncframe = new JFrame("function");
-    private JLabel head = new JLabel("functions:");
+    private JFrame gfuncframe = new JFrame(" graph function");
+    private JLabel head = new JLabel(" graph functions:");
     private JButton getNode = new JButton("getNode");
     private JButton getEdge = new JButton("getEdge");
     private JButton addNode = new JButton("addNode");
@@ -34,7 +34,7 @@ public class Gui_Gfunc implements ActionListener {
     {
         this.theGraph = gr;
 
-        this.head.setBounds(180,10,220,40);
+        this.head.setBounds(150,10,220,40);
         this.head.setFont(new Font(null,Font.BOLD,25));
         this.gfuncframe.add(this.head);
 

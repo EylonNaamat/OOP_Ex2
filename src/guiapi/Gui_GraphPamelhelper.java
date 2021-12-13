@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Random;
 
 public class Gui_GraphPamelhelper extends JPanel {
-    private int high=600;
+    private int high=700;
     private int width=600;
     private MyDirectedWeightedGraph myGraph;
     private List<NodeData> myList;
@@ -52,7 +52,7 @@ public class Gui_GraphPamelhelper extends JPanel {
         double deltax = xmax-xmin;
         deltax=(this.width-80)/deltax;
         double deltay =ymax-ymin;
-        deltay = (this.high-80)/deltay;
+        deltay = (this.high-180)/deltay;
         Graphics2D drower = (Graphics2D) getdrow;
         double tempx=0;
         double tempy=0;
@@ -82,7 +82,7 @@ public class Gui_GraphPamelhelper extends JPanel {
             tempx= nod.getLocation().x()-xmin;
             tempx = (tempx*deltax)+20;
             tempy = nod.getLocation().y()-ymin;
-            tempy =(tempy*deltay)+20;
+            tempy =(tempy*deltay)+120;
             drower.drawOval((int)tempx,(int) tempy,40,40);
             drower.drawString(Integer.toString(nod.getKey()),(int)tempx+10,(int)tempy+20);
             drower.setFont(new Font(null,Font.BOLD,10));
@@ -96,7 +96,7 @@ public class Gui_GraphPamelhelper extends JPanel {
                 tempx2= nod2.getLocation().x()-xmin;
                 tempx2 = (tempx2*deltax)+20;
                 tempy2 = nod2.getLocation().y()-ymin;
-                tempy2= (tempy2*deltay)+20;
+                tempy2= (tempy2*deltay)+120;
                 drower.drawLine((int)tempx+20,(int)tempy+30,(int)tempx2+20,(int)tempy2+10);
                 drower.drawOval((int)((((tempx+tempx2+40)/2)+tempx+20)/2),(int)((((tempy+tempy2+40)/2)+tempy+20)/2),5,5);
                 drower.drawString(Double.toString(edg.getWeight()),(int)((((tempx+tempx2+40)/2)+tempx+20)/2),(int)((((tempy+tempy2+40)/2)+tempy+20)/2));
@@ -105,26 +105,30 @@ public class Gui_GraphPamelhelper extends JPanel {
         drower.setPaint(new Color(255, 0, 0));
         drower.setFont(new Font(null,Font.BOLD,20));
         drower.setStroke(new BasicStroke(5));
+        String st = "";
         while (this.myList.size()>1)
         {
-
             NodeData src = this.myList.remove(0);
+            st=st + src.getKey() +" --> " ;
             tempx= src.getLocation().x()-xmin;
             tempx = (tempx*deltax)+20;
             tempy = src.getLocation().y()-ymin;
-            tempy =(tempy*deltay)+20;
+            tempy =(tempy*deltay)+120;
             NodeData nod2 = this.myList.get(0);
             tempx2= nod2.getLocation().x()-xmin;
             tempx2 = (tempx2*deltax)+20;
             tempy2 = nod2.getLocation().y()-ymin;
-            tempy2= (tempy2*deltay)+20;
+            tempy2= (tempy2*deltay)+120;
             drower.drawLine((int)tempx+20,(int)tempy+30,(int)tempx2+20,(int)tempy2+10);
             drower.drawOval((int)((((tempx+tempx2+40)/2)+tempx+20)/2),(int)((((tempy+tempy2+40)/2)+tempy+20)/2),5,5);
-
-
+        }
+        if(this.myList.size()==1) {
+            NodeData src = this.myList.remove(0);
+            st=st + src.getKey() ;
         }
         this.edit.setBackground(Color.red);
         this.edit.setBounds( 0,0 ,80,50);
         this.add(edit);
+        drower.drawString(st,100,25);
     }
 }
