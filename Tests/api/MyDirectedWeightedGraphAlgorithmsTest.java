@@ -374,7 +374,7 @@ class MyDirectedWeightedGraphAlgorithmsTest {
         graph1.init(g2);
         graph1.save("EylonMichael.json");
         MyDirectedWeightedGraphAlgorithms graph2 = new MyDirectedWeightedGraphAlgorithms();
-        graph2.load("C:\\Users\\eylon\\IdeaProjects\\OOP_Ex2\\EylonMichael.json");
+        graph2.load("EylonMichael.json");
         assertEquals(graph1.isConnected(), graph2.isConnected());
         assertEquals(graph1.shortestPathDist(1,3), graph2.shortestPathDist(1,3));
         assertEquals(graph1.getGraph().nodeSize(), graph2.getGraph().nodeSize());
